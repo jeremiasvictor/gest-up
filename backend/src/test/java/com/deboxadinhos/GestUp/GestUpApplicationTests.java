@@ -8,6 +8,7 @@ class GestUpApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("teste");
 	}
 
 }
