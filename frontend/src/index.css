@@ -15,11 +15,11 @@
 body {
   min-height: 100vh;
   width: 100vw;
-  background: #221e45;
+  background: #0c0c0d;
   background: linear-gradient(
-    0deg,
-    rgba(34, 30, 69, 1) 0%,
-    rgba(22, 19, 38, 1) 40%,
-    rgba(20, 20, 20, 1) 90%
+    180deg,
+    rgba(12, 12, 13, 1) 46%,
+    rgba(23, 20, 37, 1) 89%,
+    rgba(23, 20, 37, 1) 100%
   );
 }
