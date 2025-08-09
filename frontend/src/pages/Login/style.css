@@ -26,12 +26,43 @@ form {
     margin-bottom: 2px;
   }
 
-  & input {
+  & .input {
+    display: flex;
+    justify-content: center;
     margin-bottom: 0;
     background: transparent;
-    border: 1px solid;
-    border-image: linear-gradient(to bottom, #a79bde, #161326) 1;
+    position: relative;
     border-radius: 7px;
+    border: none;
+  }
+
+  & .input::before,
+  .input::after {
+    content: " ";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border-radius: 6px;
+    background-color: transparent;
+    padding: 0.5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(to bottom, #a79bde, #0d0c16 95%);
+    z-index: -1;
+  }
+
+  & .input::after {
+    filter: blur(4px);
+    opacity: 0.2;
+  }
+
+  & input {
+    border-radius: 5.5px;
+    border: none;
+    margin: auto 0;
+    background-color: #171620;
+    height: 20px;
   }
 
   & button {

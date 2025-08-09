@@ -6,9 +6,13 @@ function Login() {
       <h1>Log in to GestUp</h1>
       <form>
         <label htmlFor="username">Username</label>
-        <input type="text" name="name" />
+        <div className="input">
+          <input type="text" name="name" />
+        </div>
         <label htmlFor="username">Password</label>
-        <input type="text" name="password" />
+        <div className="input">
+          <input type="text" name="password" />
+        </div>
         <button type="button" onClick={() => console.log("botao")}>
           Log in
         </button>
