@@ -32,7 +32,6 @@ function Login() {
         <button type="button" onClick={() => console.log("botao")}>
           Log in
         </button>
-        ''
       </form>
 
       <div className="toSignIn">
