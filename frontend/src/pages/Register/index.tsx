@@ -8,7 +8,9 @@ function Register() {
         <img src="../../../public/flecha.png" alt="" className="bg-arrow" />
       </div>
 
-      <img src="../../../public/icon.png" alt="Logo Image" />
+      <a href="/">
+        <img src="../../../public/icon.png" alt="Logo Image" />
+      </a>
       <h1>Get start with us</h1>
       <form>
         <div className="name">
@@ -44,10 +46,10 @@ function Register() {
             <input type="text" name="password" />
           </div>
 
-          <div className="forgot-password">
-            <div className="fg-square"></div>
-            <p className="fg-text">
-              I agree to the <span>Terms and Privacy</span>
+          <div className="terms">
+            <input type="checkbox" id="terms" className="terms-square" />
+            <p className="terms-text">
+              I agree to the <a href="">Terms and Privacy</a>
             </p>
           </div>
         </div>
@@ -58,7 +60,7 @@ function Register() {
 
       <div className="toLogIn">
         <p>Already have an account?</p>
-        <p className="constrastP">Log in</p>
+        <a href="/login">Log in</a>
       </div>
     </div>
   );

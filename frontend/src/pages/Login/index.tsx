@@ -1,6 +1,11 @@
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import "./style.css";
 
 function Login() {
+  const [showPassword, setShowPassword] = useState(true);
+
   return (
     <div className="container">
       <div className="bg-icons">
@@ -8,26 +13,35 @@ function Login() {
         <img src="../../../public/flecha.png" alt="" className="bg-arrow" />
       </div>
 
-      <img src="../../../public/icon.png" alt="Logo Image" />
-      <h1>Log in to GestUp</h1>
+      <a href="/">
+        <img src="../../../public/icon.png" alt="Logo Image" />
+      </a>
+      <h1>Welcome back!</h1>
       <form>
-        <label htmlFor="username">Username</label>
-        <div className="input">
-          <input type="text" name="name" />
+        <div className="email-adress">
+          <label htmlFor="email">Email adress</label>
+          <div className="input">
+            <input type="text" name="email-adress" />
+          </div>
         </div>
-        <div className="password-items">
-          <label htmlFor="username">Password</label>
-          <label className="forgot" htmlFor="forgot-password">
-            Forgot password?
-          </label>
-        </div>
-        <div className="input">
-          <input type="text" name="password" />
-          <img
-            src="../../../public/hidden.png"
-            alt="Hidden Icon"
-            className="hidden-icon"
-          />
+
+        <div className="password">
+          <div className="password-label-row">
+            <label htmlFor="password">Password</label>
+            <a href="/forgot-password" className="forgot-password">
+              Forgot password?
+            </a>
+          </div>
+          <div className="input" style={{ position: "relative" }}>
+            <input type={showPassword ? "text" : "password"} name="password" />
+            <span
+              className="hidden-icon"
+              onClick={() => setShowPassword((v) => !v)}
+              style={{ cursor: "pointer" }}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
         </div>
         <button type="button" onClick={() => console.log("botao")}>
           Log in
@@ -36,7 +50,7 @@ function Login() {
 
       <div className="toSignIn">
         <p>New to GestUp?</p>
-        <p className="constrastP">Create a account</p>
+        <a href="/register">Log in</a>
       </div>
     </div>
   );
