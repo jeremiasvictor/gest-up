@@ -1,10 +1,34 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import "./style.css";
+import api from "../../services/api";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(true);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const inputEmail = useRef<HTMLInputElement>(null);
+  const inputPassword = useRef<HTMLInputElement>(null);
+
+  async function handleLogin() {
+    setLoading(true);
+    setError("");
+
+    const email = inputEmail.current?.value || "";
+    const password = inputPassword.current?.value || "";
+
+    try {
+      const response = await api.post("/login", { email, password });
+      console.log("Login sucesso", response.data);
+    } catch (err: any) {
+      setError("Usuário ou senha inválidos.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="container">
@@ -21,7 +45,7 @@ function Login() {
         <div className="email-adress">
           <label htmlFor="email">Email adress</label>
           <div className="input">
-            <input type="text" name="email-adress" />
+            <input type="text" name="email-adress" ref={inputEmail} />
           </div>
         </div>
 
@@ -32,20 +56,24 @@ function Login() {
               Forgot password?
             </a>
           </div>
-          <div className="input" style={{ position: "relative" }}>
-            <input type={showPassword ? "text" : "password"} name="password" />
+          <div className="input">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              ref={inputPassword}
+            />
             <span
               className="hidden-icon"
               onClick={() => setShowPassword((v) => !v)}
-              style={{ cursor: "pointer" }}
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
         </div>
-        <button type="button" onClick={() => console.log("botao")}>
-          Log in
+        <button type="button" onClick={handleLogin} disabled={loading}>
+          {loading ? "Entrando..." : "Log in"}
         </button>
+        {error && <p>{error}</p>}
       </form>
 
       <div className="toSignIn">

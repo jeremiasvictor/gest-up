@@ -57,7 +57,6 @@ img {
 form {
   display: flex;
   flex-direction: column;
-  gap: 7px;
   padding: 40px;
   height: 460px;
   width: 400px;
@@ -79,6 +78,12 @@ form {
     }
   }
 
+  & p {
+    color: #e57373;
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
   & label {
     color: #fff8f0;
     font-size: 12px;
@@ -88,7 +93,7 @@ form {
   & .input {
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 9px;
     margin-top: 7px;
     background: transparent;
     position: relative;

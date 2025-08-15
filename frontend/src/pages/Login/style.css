@@ -68,6 +68,12 @@ form {
     rgba(255, 255, 255, 0)
   );
 
+  & p {
+    color: #e57373;
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
   & label {
     color: #fff8f0;
     font-size: 14px;
