@@ -1,7 +1,7 @@
 package com.deboxadinhos.GestUp.controllers;
 
 
-import com.deboxadinhos.GestUp.UsuarioRepository;
+import com.deboxadinhos.GestUp.repository.UsuarioRepository;
 import com.deboxadinhos.GestUp.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
-public class usuarioController {
+public class UsuarioController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
