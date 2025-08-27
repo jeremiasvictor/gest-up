@@ -32,15 +32,12 @@ public class Usuario {
         return email;
     }
 
-    public long getId() {
-        return id;
-    }
+    public long getId() { return id; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    //falta muita seguranca
+    public String getSenha() { return senha; }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+    public void setEmail(String email) { this.email = email; }
+
+    public void setSenha(String senha) { this.senha = senha; }
 }
