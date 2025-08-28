@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+@Entity
 public class Produto {
 
     @Id
@@ -22,7 +23,7 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    // Getters and Setters
+    // Getters and Setters ruim
     public Long getId() {return this.id;}
     public void setId(Long id) {this.id = id;}
 

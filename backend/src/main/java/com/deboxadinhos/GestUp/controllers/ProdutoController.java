@@ -20,7 +20,6 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<Produto> listar() {return produtoRepository.findAll();
-    }
+    public List<Produto> listar() { return produtoRepository.findAll(); }
 
 }

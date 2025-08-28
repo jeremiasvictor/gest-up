@@ -26,7 +26,7 @@ public class UsuarioController {
         return usuarioRepository.save(usuario);
     }
 
-    @PostMapping("/logingestUp")//rota login
+    @PostMapping("/loginGestUp")//rota login
     // Recebe a resposta do front end e cria um objeto usuario
     public ResponseEntity<?> loginUsuario(@RequestBody Usuario usuario){
 
