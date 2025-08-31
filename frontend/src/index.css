@@ -15,11 +15,15 @@
 body {
   min-height: 100vh;
   width: 100vw;
-  background: #0c0c0d;
-  background: linear-gradient(
-    180deg,
-    rgba(12, 12, 13, 1) 46%,
-    rgba(23, 20, 37, 1) 89%,
-    rgba(23, 20, 37, 1) 100%
-  );
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark {
+  background-color: #0c0c0d;
+  color: #c8c5c1;
+}
+
+body.light {
+  background-color: #c8c5c1;
+  color: #0c0c0d;
 }

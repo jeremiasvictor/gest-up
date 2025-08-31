@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
+.header {
+  padding: 15px 30px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #a79bde;
+}
+
+.gestup-logo img {
+  width: 100px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user {
+  background-color: #2c264a;
+  border-radius: 20px;
+  padding: 7px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #a79bde;
+}
+
+.fa-user {
+  display: flex;
+  align-items: center;
+  padding-bottom: 3px;
+}
