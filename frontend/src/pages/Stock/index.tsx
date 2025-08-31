@@ -1,19 +1,19 @@
 // import api from "../../services/api";
 import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import {
-  FaGear,
+  //FaGear,
   FaBars,
-  FaMoon,
+  //FaMoon,
   FaUser,
-  FaLayerGroup,
-  FaBoxOpen,
-  FaCheckToSlot,
-  FaFaceSmile,
-  FaEye,
-  FaEyeSlash,
-  FaExpand,
+  //FaLayerGroup,
+  //FaBoxOpen,
+  //FaCheckToSlot,
+  //FaFaceSmile,
+  //FaEye,
+  //FaEyeSlash,
+  //FaExpand,
 } from "react-icons/fa6";
-import { IoIosNotifications, IoIosArrowDown } from "react-icons/io";
+//import { IoIosNotifications, IoIosArrowDown } from "react-icons/io";
 
 import "./style.css";
 
