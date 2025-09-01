@@ -1,10 +1,11 @@
 package com.deboxadinhos.GestUp.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
+@Table(name = "usuario")
 public class Usuario {
 
     @Id
@@ -13,6 +14,10 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+    private String cpf;
+
+    @OneToMany(mappedBy = "usuario",fetch = FetchType.EAGER, cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Empresa> empresa;
 
     public Usuario(){}
     public Usuario(String nome, String email, String senha){
