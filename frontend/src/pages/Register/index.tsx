@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import api from "../../services/api";
-import "./style.css";
+import styles from "./Register.module.css";
 
 function Register() {
   const [loading, setLoading] = useState(false);
@@ -12,6 +12,15 @@ function Register() {
   const inputEmail = useRef<HTMLInputElement>(null);
   const inputPassword = useRef<HTMLInputElement>(null);
   const inputTerms = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const pageClassName = styles.RegisterPage;
+    document.body.classList.add(pageClassName);
+
+    return () => {
+      document.body.classList.remove(pageClassName);
+    };
+  }, []);
 
   async function handleRegister() {
     setLoading(true);
@@ -47,58 +56,70 @@ function Register() {
   }
 
   return (
-    <div className="container">
-      <div className="bg-icons">
-        <img src="../../../public/flecha.png" alt="" className="bg-arrow" />
-        <img src="../../../public/flecha.png" alt="" className="bg-arrow" />
+    <div className={styles.container}>
+      <div className={styles.bgIcons}>
+        <img
+          src="../../../public/flecha.png"
+          alt=""
+          className={styles.bgArrow}
+        />
+        <img
+          src="../../../public/flecha.png"
+          alt=""
+          className={styles.bgArrow}
+        />
       </div>
 
       <a href="/">
-        <img src="../../../public/icon.png" alt="Logo Image" />
+        <img
+          className={styles.logo}
+          src="../../../public/icon.png"
+          alt="Logo Image"
+        />
       </a>
-      <h1>Get start with us</h1>
-      <form>
-        <div className="name">
-          <div className="first">
+      <h1 className={styles.title}>Get start with us</h1>
+      <form className={styles.registerForm}>
+        <div className={styles.name}>
+          <div className={styles.first}>
             <label htmlFor="first">First name</label>
-            <div className="name-input input">
+            <div className={`${styles.nameInput} ${styles.input}`}>
               <input type="text" name="first-name" ref={inputFirstName} />
             </div>
           </div>
 
-          <div className="last">
+          <div className={styles.last}>
             <label htmlFor="last">Last name</label>
-            <div className="name-input input">
+            <div className={`${styles.nameInput} ${styles.input}`}>
               <input type="text" name="last-name" ref={inputLastName} />
             </div>
           </div>
         </div>
-        <div className="company-name">
+        <div className={styles.companyName}>
           <label htmlFor="company">Company name</label>
-          <div className="input">
+          <div className={styles.input}>
             <input type="text" name="company-name" ref={inputCompany} />
           </div>
         </div>
-        <div className="email-adress">
+        <div className={styles.emailAdress}>
           <label htmlFor="email">Email adress</label>
-          <div className="input">
+          <div className={styles.input}>
             <input type="text" name="email-adress" ref={inputEmail} />
           </div>
         </div>
-        <div className="password">
+        <div className={styles.password}>
           <label htmlFor="password">Create a password</label>
-          <div className="input">
+          <div className={styles.input}>
             <input type="text" name="password" ref={inputPassword} />
           </div>
 
-          <div className="terms">
+          <div className={styles.terms}>
             <input
               type="checkbox"
               id="terms"
-              className="terms-square"
+              className={styles.termsSquare}
               ref={inputTerms}
             />
-            <p className="terms-text">
+            <p className={styles.termsText}>
               I agree to the <a href="">Terms and Privacy</a>
             </p>
           </div>
@@ -106,10 +127,10 @@ function Register() {
         <button type="button" onClick={handleRegister} disabled={loading}>
           {loading ? "Criando..." : "Create account"}
         </button>
-        {error && <p>{error}</p>}
+        {error && <p className={styles.errorMessage}>{error}</p>}
       </form>
 
-      <div className="toLogIn">
+      <div className={styles.toLogIn}>
         <p>Already have an account?</p>
         <a href="/login">Log in</a>
       </div>

@@ -1,7 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-import "./style.css";
+import styles from "./Login.module.css";
 import api from "../../services/api";
 
 function Login() {
@@ -12,6 +12,15 @@ function Login() {
 
   const inputEmail = useRef<HTMLInputElement>(null);
   const inputPassword = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const pageClassName = styles.loginPage;
+    document.body.classList.add(pageClassName);
+
+    return () => {
+      document.body.classList.remove(pageClassName);
+    };
+  }, []);
 
   async function handleLogin() {
     setLoading(true);
@@ -31,39 +40,51 @@ function Login() {
   }
 
   return (
-    <div className="container">
-      <div className="bg-icons">
-        <img src="../../../public/flecha.png" alt="" className="bg-arrow" />
-        <img src="../../../public/flecha.png" alt="" className="bg-arrow" />
+    <div className={styles.container}>
+      <div className={styles.bgIcons}>
+        <img
+          src="../../../public/flecha.png"
+          alt=""
+          className={styles.bgArrow}
+        />
+        <img
+          src="../../../public/flecha.png"
+          alt=""
+          className={styles.bgArrow}
+        />
       </div>
 
       <a href="/">
-        <img src="../../../public/icon.png" alt="Logo Image" />
+        <img
+          className={styles.logo}
+          src="../../../public/icon.png"
+          alt="Logo Image"
+        />
       </a>
-      <h1>Welcome back!</h1>
-      <form>
-        <div className="email-adress">
+      <h1 className={styles.title}>Welcome back!</h1>
+      <form className={styles.loginForm}>
+        <div className={styles.emailAdress}>
           <label htmlFor="email">Email adress</label>
-          <div className="input">
+          <div className={styles.input}>
             <input type="text" name="email-adress" ref={inputEmail} />
           </div>
         </div>
 
-        <div className="password">
-          <div className="password-label-row">
+        <div className={styles.password}>
+          <div className={styles.passwordLabelRow}>
             <label htmlFor="password">Password</label>
-            <a href="/forgot-password" className="forgot-password">
+            <a href="/forgot-password" className={styles.forgotPassword}>
               Forgot password?
             </a>
           </div>
-          <div className="input">
+          <div className={styles.input}>
             <input
               type={showPassword ? "text" : "password"}
               name="password"
               ref={inputPassword}
             />
             <span
-              className="hidden-icon"
+              className={styles.hiddenIcon}
               onClick={() => setShowPassword((v) => !v)}
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -76,9 +97,9 @@ function Login() {
         {error && <p>{error}</p>}
       </form>
 
-      <div className="toSignIn">
+      <div className={styles.toSignIn}>
         <p>New to GestUp?</p>
-        <a href="/register">Log in</a>
+        <a href="/register">Sign up</a>
       </div>
     </div>
   );

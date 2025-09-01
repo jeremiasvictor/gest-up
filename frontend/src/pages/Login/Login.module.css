@@ -1,0 +1,227 @@
+.loginPage {
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 12, 13, 1) 46%,
+    rgba(23, 20, 37, 1) 89%,
+    rgba(23, 20, 37, 1) 100%
+  );
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 50px;
+  min-height: 100vh;
+}
+
+.bgIcons {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.bgArrow {
+  position: absolute;
+  height: auto;
+  opacity: 0.06;
+  filter: blur(10px);
+}
+
+.bgArrow:first-of-type {
+  width: 55vw;
+  left: -15vw;
+  bottom: -62vw;
+  transform: rotate(360deg);
+}
+
+.bgArrow:nth-of-type(2) {
+  width: 55vw;
+  right: -25vw;
+  bottom: -75vw;
+  transform: rotate(355deg) scaleX(-1);
+}
+
+.title {
+  color: #fff8f0;
+  font-size: 18px;
+  text-align: center;
+  padding-bottom: 20px;
+  cursor: default;
+}
+
+.logo {
+  width: 35px;
+  margin-bottom: 10px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 55px 40px 40px 40px;
+  /* height: 350px; */
+  border-radius: 45px;
+  border: 1px solid #48456c;
+  background-image: linear-gradient(
+    to top,
+    rgba(155, 137, 235, 0.05),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.loginForm p {
+  color: #e57373;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.loginForm label {
+  color: #fff8f0;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.passwordLabelRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.forgotPassword {
+  display: block;
+  margin-top: 4px;
+  margin-left: 2px;
+  font-size: 13px;
+  color: #a79bde;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.loginForm .forgotPassword:hover {
+  opacity: 0.8;
+}
+
+.loginForm .input {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  margin-top: 7px;
+  background: transparent;
+  position: relative;
+  border-radius: 10px;
+  border: none;
+}
+
+.loginForm .input::before,
+.loginForm .input::after {
+  content: " ";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-radius: 12px;
+  background-color: transparent;
+  padding: 0.5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: linear-gradient(to bottom, #a79bde, transparent);
+  z-index: -1;
+}
+
+.loginForm .input::after {
+  filter: blur(4px);
+  opacity: 0.2;
+}
+
+.loginForm input {
+  border-radius: 12px;
+  border: none;
+  margin: auto 0;
+  background-color: #13131a;
+  height: 40px;
+  width: 320px;
+  color: #fff8f0;
+  padding: 0 14px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.loginForm input[type="password"] {
+  font-family: "password", Arial, Helvetica, sans-serif;
+  -webkit-text-security: disc;
+}
+
+.loginForm a {
+  color: #a79bde;
+  text-decoration: none;
+}
+
+.loginForm a:hover {
+  opacity: 0.8;
+}
+
+.hiddenIcon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #a79bde;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.loginForm button {
+  border-radius: 10px;
+  height: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 12px;
+  background-color: #a79bde;
+  border: none;
+}
+
+.loginForm button:hover {
+  opacity: 0.8;
+}
+
+.toSignIn {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  height: 70px;
+  width: 400px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #48456c;
+  border-radius: 25px;
+  gap: 45px;
+  background-image: linear-gradient(
+    to top,
+    rgba(155, 137, 235, 0.05),
+    rgba(255, 255, 255, 0)
+  );
+}
+.toSignIn p {
+  font-size: 16px;
+  color: #fff8f0;
+}
+
+.toSignIn a {
+  color: #a79bde;
+  text-decoration: none;
+}
+
+.toSignIn a:hover {
+  opacity: 0.8;
+}

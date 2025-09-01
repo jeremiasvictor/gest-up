@@ -15,30 +15,32 @@ import {
 } from "react-icons/fa6";
 //import { IoIosNotifications, IoIosArrowDown } from "react-icons/io";
 
-import "./style.css";
+import styles from "./Stock.module.css";
 
 function Stock() {
   return (
-    <header className="header">
-      <nav className="nav-container">
-        <div className="header-left">
-          <button className="menu">
-            <FaBars className="fa-bars" />
-          </button>
+    <div className={styles.stockPageContainer}>
+      <header>
+        <nav className={styles.navContainer}>
+          <div className={styles.headerLeft}>
+            <button className={styles.menu}>
+              <FaBars className={styles.FaBars} />
+            </button>
 
-          <a href="/" className="gestup-logo">
-            <img src="../../../public/com-sombra.png" alt="Logo Image" />
-          </a>
-        </div>
+            <a href="/" className={styles.gestupLogo}>
+              <img src="../../../public/com-sombra.png" alt="Logo Image" />
+            </a>
+          </div>
 
-        <div className="header-right">
-          <ThemeToggle />
-          <button className="user">
-            <FaUser className="fa-user" />
-          </button>
-        </div>
-      </nav>
-    </header>
+          <div className={styles.headerRight}>
+            <ThemeToggle />
+            <button className={styles.user}>
+              <FaUser className={styles.faUser} />
+            </button>
+          </div>
+        </nav>
+      </header>
+    </div>
   );
 }
 
