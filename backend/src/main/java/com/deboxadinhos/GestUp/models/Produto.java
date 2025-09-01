@@ -1,10 +1,9 @@
 package com.deboxadinhos.GestUp.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "produto")
 public class Produto {
 
     @Id
@@ -14,6 +13,9 @@ public class Produto {
     private String nome;
     private int quantidade;
     private double preco;
+
+    @ManyToOne()
+    private Empresa empresa;
 
     public Produto(){}
 
