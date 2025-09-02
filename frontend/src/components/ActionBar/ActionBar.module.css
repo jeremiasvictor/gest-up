@@ -1,0 +1,70 @@
+.actionBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  color: #fff8f0;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.header p {
+  color: #a9a9b2;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.controls {
+  display: flex;
+  gap: 16px;
+}
+
+.searchWrapper {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #a9a9b2;
+}
+
+.searchWrapper input {
+  background-color: #121114;
+  border: none;
+  border-radius: 8px;
+  height: 35px;
+  width: 250px;
+  padding-left: 20px;
+  color: #fff8f0;
+  font-size: 12px;
+}
+
+.searchWrapper input::placeholder {
+  color: #a9a9b2;
+}
+
+.addButton {
+  background-color: #a79bde;
+  color: #171425;
+  font-weight: 600;
+  font-size: 14px;
+  height: 44px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.addButton:hover {
+  opacity: 0.9;
+}
