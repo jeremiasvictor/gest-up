@@ -1,0 +1,19 @@
+.appLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.appBody {
+  display: flex;
+  flex-grow: 1;
+  padding: 0 10px 0 10px;
+}
+
+.mainContent {
+  flex-grow: 1;
+  padding: 0 0 0 5px;
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,56 @@
+.productTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.productTable th,
+.productTable td {
+  padding: 16px 24px;
+  text-align: left;
+  border-bottom: 1px solid #2c264a;
+}
+
+.productTable th {
+  color: #a9a9b2;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.productTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.stockStatus {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.inStock {
+  background-color: rgba(3, 166, 115, 0.1);
+  color: #03a673;
+}
+.lowStock {
+  background-color: rgba(255, 184, 0, 0.1);
+  color: #ffb800;
+}
+.noStock {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+.service {
+  background-color: rgba(167, 155, 222, 0.1);
+  color: #a79bde;
+}
+
+.actionsButton {
+  background: none;
+  border: none;
+  color: #a9a9b2;
+  font-size: 16px;
+  cursor: pointer;
+}

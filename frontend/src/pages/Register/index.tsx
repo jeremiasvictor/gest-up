@@ -27,6 +27,7 @@ function Register() {
     setError("");
     const firstName = inputFirstName.current?.value || "";
     const lastName = inputLastName.current?.value || "";
+    const completeName = firstName + " " + lastName || "";
     const company = inputCompany.current?.value || "";
     const email = inputEmail.current?.value || "";
     const password = inputPassword.current?.value || "";
@@ -39,12 +40,10 @@ function Register() {
     }
 
     try {
-      const response = await api.post("/register", {
-        firstName,
-        lastName,
-        company,
-        email,
-        password,
+      const response = await api.post("/usuario", {
+        nome: completeName,
+        email: email,
+        senha: password,
       });
 
       console.log("Registro sucesso", response.data);

@@ -30,7 +30,10 @@ function Login() {
     const password = inputPassword.current?.value || "";
 
     try {
-      const response = await api.post("/login", { email, password });
+      const response = await api.post("/usuario/login", {
+        email: email,
+        senha: password,
+      });
       console.log("Login sucesso", response.data);
     } catch (err: any) {
       setError("Usuário ou senha inválidos.");
