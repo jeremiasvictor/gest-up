@@ -12,7 +12,11 @@ public class Usuario {
     @GeneratedValue
     private long id;
     private String nome;
+
+    @Column(unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String senha;
     private String cpf;
 
@@ -36,6 +40,8 @@ public class Usuario {
 
     //falta muita seguranca
     public String getSenha() { return this.senha; }
+
+    public String getCpf() { return this.cpf; }
 
     public void setEmail(String email) { this.email = email; }
 
