@@ -2,8 +2,8 @@ package com.deboxadinhos.GestUp.controllers;
 
 import com.deboxadinhos.GestUp.repository.UsuarioRepository;
 import com.deboxadinhos.GestUp.models.Usuario;
+import com.deboxadinhos.GestUp.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +14,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 public class UsuarioController {
 
+    private UsuarioService usuarioService;
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -23,27 +24,14 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario save(@RequestBody Usuario usuario){
-        return usuarioRepository.save(usuario);
+    public ResponseEntity<?> cadastroUsuario(@RequestBody Usuario usuario){
+        return usuarioService.realizarCadastro(usuario);
     }
 
-    @PostMapping("/login")//rota login
     // Recebe a resposta do front end e cria um objeto usuario
+    @PostMapping("/login")
     public ResponseEntity<?> loginUsuario(@RequestBody Usuario usuario){
-
-        Usuario usuarioProcurado = usuarioRepository.findByEmail(usuario.getEmail());
-
-        if (usuarioProcurado == null){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Erro: Email ou senha inválidos");
-        }
-
-        if (usuario.getSenha().equals(usuarioProcurado.getSenha())){
-            return ResponseEntity.ok().build();
-        }
-        else{
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Senha incorreta");
-        }
-
+        return usuarioService.realizarLogin(usuario);
     }
 
 }
