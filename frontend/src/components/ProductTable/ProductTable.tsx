@@ -8,6 +8,16 @@ const mockProducts = [
   { id: 2, name: "Café Especial em Grãos 250g", value: 35.0, quantity: 4 },
   { id: 3, name: "Caixa de Brownie (6 unidades)", value: 25.0, quantity: 0 },
   { id: 4, name: "Serviço de Entrega", value: 8.0, quantity: null },
+  { id: 5, name: "Sorvete de flocos", value: 95.0, quantity: 40 },
+  {
+    id: 6,
+    name: "Milkshake Espacial de Morango com chocolate, nozes, paçoca e amendoim",
+    value: 135.0,
+    quantity: 2,
+  },
+  { id: 7, name: "Bolacha recheada", value: 2.0, quantity: 54 },
+  { id: 8, name: "Empadão de frango", value: 17.0, quantity: 123 },
+  { id: 9, name: "Tortilete", value: 33.0, quantity: 1000 },
 ];
 
 function ProductTable() {
@@ -53,7 +63,9 @@ function ProductTable() {
       <tbody>
         {products.map((product) => (
           <tr key={product.id}>
-            <td>{product.name}</td>
+            <td className={styles.productNameCell} title={product.name}>
+              {product.name}
+            </td>
             <td>{product.id}</td>
             <td>{`R$ ${product.value.toFixed(2).replace(".", ",")}`}</td>
             <td>
@@ -66,7 +78,7 @@ function ProductTable() {
               </span>
             </td>
             <td></td>
-            <td>
+            <td className={styles.actionsCell}>
               <button className={styles.actionsButton}>
                 <FaEllipsisV />
               </button>

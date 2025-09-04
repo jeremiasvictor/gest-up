@@ -12,6 +12,7 @@
 
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .sidebarNav {
@@ -69,8 +70,7 @@
   background: radial-gradient(
     ellipse at center,
     rgba(91, 71, 192, 0.3) 0%,
-    /* Cor mais intensa no centro */ rgba(167, 155, 222, 0) 70%
-      /* Totalmente transparente em 70% do raio */
+    rgba(167, 155, 222, 0) 70%
   );
   opacity: 0.3;
   z-index: -1;

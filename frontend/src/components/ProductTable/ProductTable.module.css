@@ -1,22 +1,50 @@
 .productTable {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 8px;
   border-radius: 8px;
   overflow: hidden;
+  table-layout: fixed;
 }
 
-.productTable th,
-.productTable td {
-  padding: 16px 24px;
-  text-align: left;
-  border-bottom: 1px solid #2c264a;
+.productNameCell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 250px;
 }
+
+.productTable th:nth-child(1) {
+  width: 30%;
+} /* coluna name */
+.productTable th:nth-child(2) {
+  width: 10%;
+} /* coluna ID */
+.productTable th:nth-child(3) {
+  width: 15%;
+} /* coluna value */
+.productTable th:nth-child(4) {
+  width: 20%;
+} /* coluna quantity */
+.productTable th:nth-child(5) {
+  width: 15%;
+} /* coluna balance */
+.productTable th:nth-child(6) {
+  width: 10%;
+} /* icon */
 
 .productTable th {
+  padding: 16px 24px;
+  text-align: left;
   color: #a9a9b2;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.productTable td {
+  padding: 18px 24px;
+  vertical-align: middle;
 }
 
 .productTable tbody tr:last-child td {
@@ -47,10 +75,41 @@
   color: #a79bde;
 }
 
+.actionsCell {
+  white-space: nowrap; /* impede a quebra de linha */
+  text-align: right;
+}
+
 .actionsButton {
   background: none;
   border: none;
   color: #a9a9b2;
   font-size: 16px;
   cursor: pointer;
+  padding: 8px;
+  transition: background-color 0.2s;
+}
+
+/* impares */
+.productTable tbody tr:nth-child(odd) {
+  background-color: #131215;
+}
+
+/* pares */
+.productTable tbody tr:nth-child(even) {
+  background-color: #1c1b23;
+}
+
+.productTable td:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.productTable td:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.productTable tbody tr:hover td {
+  background-color: #2c264a;
 }

@@ -8,7 +8,7 @@ function Register() {
   const [error, setError] = useState("");
   const inputFirstName = useRef<HTMLInputElement>(null);
   const inputLastName = useRef<HTMLInputElement>(null);
-  const inputCompany = useRef<HTMLInputElement>(null);
+  const inputCPF = useRef<HTMLInputElement>(null);
   const inputEmail = useRef<HTMLInputElement>(null);
   const inputPassword = useRef<HTMLInputElement>(null);
   const inputTerms = useRef<HTMLInputElement>(null);
@@ -28,7 +28,7 @@ function Register() {
     const firstName = inputFirstName.current?.value || "";
     const lastName = inputLastName.current?.value || "";
     const completeName = firstName + " " + lastName || "";
-    const company = inputCompany.current?.value || "";
+    const cpf = inputCPF.current?.value || "";
     const email = inputEmail.current?.value || "";
     const password = inputPassword.current?.value || "";
     const terms = inputTerms.current?.checked || false;
@@ -94,9 +94,9 @@ function Register() {
           </div>
         </div>
         <div className={styles.companyName}>
-          <label htmlFor="company">Company name</label>
+          <label htmlFor="company">CPF</label>
           <div className={styles.input}>
-            <input type="text" name="company-name" ref={inputCompany} />
+            <input type="text" name="company-name" ref={inputCPF} />
           </div>
         </div>
         <div className={styles.emailAdress}>

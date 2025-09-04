@@ -9,6 +9,7 @@ function MainContentCard({ children }: CardProps) {
   return (
     <div className={styles.card}>
       <div className={styles.cardContent}>{children}</div>
+      <div className={styles.mainContentCardLight}></div>
     </div>
   );
 }
