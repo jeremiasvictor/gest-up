@@ -1,5 +1,7 @@
 package com.deboxadinhos.GestUp.services;
 
+import com.deboxadinhos.GestUp.dto.CreateUserDto;
+import com.deboxadinhos.GestUp.dto.ResponseUserDTO;
 import com.deboxadinhos.GestUp.exceptions.usuarioException.*;
 import com.deboxadinhos.GestUp.models.User;
 import com.deboxadinhos.GestUp.repository.UserRepository;
@@ -8,37 +10,44 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    public ResponseEntity<?> doLogin(User userRequested) {
-
+    public ResponseUserDTO doLogin(CreateUserDto userRequested) {
+        //Valida a sintaxe do email.
         authenticateEmail(userRequested.getEmail());
 
-        User userInBank = userRepository.findByEmail(userRequested.getEmail());
+        //Cria um usuário nulo para atribuição posterior, cria um usuario com classe Optional (pois se o usuario nao existir, nao retornara NullPointerException)
+        User userInBank;
+        Optional<User> optionalUser = userRepository.findByEmail(userRequested.getEmail());
 
-        if (userInBank.getEmail() == null) {
-            throw new NotFoundUserException();
-        }
+        //Se tem algo no optinal (não é nulo e só pode ser user), tire para fora e atribua no userInBank, se não, jogue a exceção.
+        if (optionalUser.isPresent()) { userInBank = optionalUser.get(); }
+        else { throw new NotFoundUserException(); }
 
-        if (userRequested.getPassword() == null){
-            throw new VoidPasswordException();
-        } else if (!userInBank.getPassword().equals(userRequested.getPassword())) {
-            throw new InvalidPasswordException();
-        }
+        if (userRequested.getPassword() == null){ throw new VoidPasswordException(); }
+        else if (!userInBank.getPassword().equals(userRequested.getPassword())) { throw new InvalidPasswordException();}
 
-
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Login sucess");
+        return new ResponseUserDTO(userInBank.getId(), userInBank.getName(), userInBank.getEmail()) ;
     }
 
-    public ResponseEntity<?> doRegister(User userResquested){
+    public ResponseUserDTO doRegister(CreateUserDto userResquested){
         authenticateEmail(userResquested.getEmail());
 
-        userRepository.save(userResquested);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Register sucess");
+        Optional<User> optionalUser = userRepository.findByEmail(userResquested.getEmail());
+
+        if (optionalUser.isPresent()) {
+            throw new UserAlreadyExists();
+        } else {
+            User user = new User(userResquested.getName(),userResquested.getEmail(),userResquested.getPassword());
+            userRepository.save(user);
+            return new ResponseUserDTO(user.getId(), user.getName(), user.getEmail());
+        }
     }
 
     //Quando tiver nada para fazer coloque o cpf

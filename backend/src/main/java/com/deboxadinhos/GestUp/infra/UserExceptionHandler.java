@@ -1,9 +1,6 @@
 package com.deboxadinhos.GestUp.infra;
 
-import com.deboxadinhos.GestUp.exceptions.usuarioException.InvalidEmailException;
-import com.deboxadinhos.GestUp.exceptions.usuarioException.InvalidPasswordException;
-import com.deboxadinhos.GestUp.exceptions.usuarioException.VoidPasswordException;
-import com.deboxadinhos.GestUp.exceptions.usuarioException.NotFoundUserException;
+import com.deboxadinhos.GestUp.exceptions.usuarioException.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -31,5 +28,10 @@ public class UserExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NotFoundUserException.class)
     public ResponseEntity<String> NonExistUserHandler(NotFoundUserException nfue) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(nfue.getMessage());
+    }
+
+    @ExceptionHandler(UserAlreadyExists.class)
+    public ResponseEntity<String> UserAlreadyExists(UserAlreadyExists uae) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(uae.getMessage());
     }
 }

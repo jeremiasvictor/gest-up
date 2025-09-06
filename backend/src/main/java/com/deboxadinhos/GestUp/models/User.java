@@ -13,17 +13,15 @@ public class User {
     @GeneratedValue
     private UUID id;
     private String name;
-
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
-
     @Column(nullable = false)
     private String password;
     private String cpf;
-
     @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Business> business;
 
+    //Constructors
     public User(){}
     public User(String name, String email, String password){
         this.name = name;
@@ -31,20 +29,20 @@ public class User {
         this.password = password;
     }
 
-    public String getName() { return this.name; }
 
-    public String getEmail() {
-        return this.email;
-    }
-
+    //Getters and Setters
     public UUID getId() { return this.id; }
 
-    //falta muita seguranca
-    public String getPassword() { return this.password; }
+    public String getName() { return this.name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getCpf() { return this.cpf; }
-
+    public String getEmail() { return this.email; }
     public void setEmail(String email) { this.email = email; }
 
+    public String getPassword() { return this.password; }
     public void setPassword(String password) { this.password = password; }
+
+    public String getCpf() { return this.cpf; }
+    public void setCpf(String cpf) { this.cpf = cpf; }
+
 }
