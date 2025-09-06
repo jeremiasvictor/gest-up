@@ -6,10 +6,9 @@ import com.deboxadinhos.GestUp.exceptions.usuarioException.*;
 import com.deboxadinhos.GestUp.models.User;
 import com.deboxadinhos.GestUp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,6 +16,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public List<User> findAll() { return userRepository.findAll(); }
 
     public ResponseUserDTO doLogin(CreateUserDto userRequested) {
         //Valida a sintaxe do email.
@@ -26,7 +27,7 @@ public class UserService {
         User userInBank;
         Optional<User> optionalUser = userRepository.findByEmail(userRequested.getEmail());
 
-        //Se tem algo no optinal (não é nulo e só pode ser user), tire para fora e atribua no userInBank, se não, jogue a exceção.
+        //Se tem algo no optional (não é nulo e só pode ser user), tire para fora e atribua no userInBank, se não, jogue a exceção.
         if (optionalUser.isPresent()) { userInBank = optionalUser.get(); }
         else { throw new NotFoundUserException(); }
 
@@ -42,7 +43,7 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findByEmail(userResquested.getEmail());
 
         if (optionalUser.isPresent()) {
-            throw new UserAlreadyExists();
+            throw new EmailAlreadyExistsException();
         } else {
             User user = new User(userResquested.getName(),userResquested.getEmail(),userResquested.getPassword());
             userRepository.save(user);

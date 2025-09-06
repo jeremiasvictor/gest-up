@@ -45,4 +45,6 @@ public class User {
     public String getCpf() { return this.cpf; }
     public void setCpf(String cpf) { this.cpf = cpf; }
 
+    public List<Business> getBusiness() { return this.business; }
+
 }

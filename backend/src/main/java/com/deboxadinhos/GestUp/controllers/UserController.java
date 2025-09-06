@@ -20,17 +20,15 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
 
     @GetMapping
     public List<User> list(){
-        return userRepository.findAll();
+        return userService.findAll();
     }
 
     @PostMapping
     public ResponseEntity<?> registerUser(@RequestBody CreateUserDto user){
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.doRegister(user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.doRegister(user));
     }
 
     // Recebe a resposta do front end e cria um objeto usuario

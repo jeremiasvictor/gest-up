@@ -30,8 +30,8 @@ public class UserExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(nfue.getMessage());
     }
 
-    @ExceptionHandler(UserAlreadyExists.class)
-    public ResponseEntity<String> UserAlreadyExists(UserAlreadyExists uae) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(uae.getMessage());
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<String> UserAlreadyExists(EmailAlreadyExistsException eae) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(eae.getMessage());
     }
 }
