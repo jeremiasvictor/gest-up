@@ -8,7 +8,7 @@ function Home() {
 
   async function getUsers() {
     try {
-      const response = await api.get("/usuario");
+      const response = await api.get("/user");
       setUsers(response.data);
       console.log(response.data);
     } catch (error) {
