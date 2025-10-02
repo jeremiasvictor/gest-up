@@ -12,13 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
 
     public List<User> findAll() { return userRepository.findAll(); }
-
     public ResponseUserDTO doLogin(CreateUserDto userRequested) {
         //Valida a sintaxe do email.
         authenticateEmail(userRequested.getEmail());
