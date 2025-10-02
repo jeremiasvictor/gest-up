@@ -30,7 +30,7 @@ public class Product {
     // Getters and Setters ruim
     public UUID getId() {return this.id;}
 
-    public String getNome() {return this.name;}
+    public String getName() {return this.name;}
     public void setNome(String nome) {this.name=name;}
 
     public int getQuantity() {return this.quantity;}

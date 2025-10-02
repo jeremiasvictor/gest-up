@@ -18,7 +18,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     private String cpf;
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Business> business;
 
     //Constructors
