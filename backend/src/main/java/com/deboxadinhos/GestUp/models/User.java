@@ -1,5 +1,6 @@
 package com.deboxadinhos.GestUp.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class User {
     private String password;
     private String cpf;
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonManagedReference
     private List<Business> business;
 
     //Constructors
