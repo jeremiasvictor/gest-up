@@ -17,7 +17,10 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> findAll() { return userRepository.findAll(); }
+    @Override
+    public List<User> findAll() throws NotFoundUserException, InvalidPasswordException{ return userRepository.findAll(); }
+
+    @Override
     public ResponseUserDTO doLogin(CreateUserDto userRequested) {
         //Valida a sintaxe do email.
         authenticateEmail(userRequested.getEmail());
@@ -36,9 +39,10 @@ public class UserService implements IUserService {
         return new ResponseUserDTO(userInBank.getId(), userInBank.getName(), userInBank.getEmail()) ;
     }
 
+    @Override
     public ResponseUserDTO doRegister(CreateUserDto userResquested){
-        authenticateEmail(userResquested.getEmail());
 
+        authenticateEmail(userResquested.getEmail());
         Optional<User> optionalUser = userRepository.findByEmail(userResquested.getEmail());
 
         if (optionalUser.isPresent()) {
@@ -57,5 +61,4 @@ public class UserService implements IUserService {
             throw new InvalidEmailException();
         }
     }
-
 }
