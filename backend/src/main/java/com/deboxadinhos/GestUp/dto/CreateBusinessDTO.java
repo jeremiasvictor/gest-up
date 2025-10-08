@@ -11,15 +11,13 @@ public class CreateBusinessDTO {
     private String cnpj;
     private String address;
     private UUID userID;
-    private List<Product> products;
 
     public CreateBusinessDTO(){}
-    public CreateBusinessDTO(String name, String cnpj, String address, UUID userID, List<Product> products) {
+    public CreateBusinessDTO(String name, String cnpj, String address, UUID userID) {
         this.name = name;
         this.cnpj = cnpj;
         this.address = address;
         this.userID = userID;
-        this.products = products;
     }
 
     public String getName() {
@@ -52,13 +50,5 @@ public class CreateBusinessDTO {
 
     public void setUserID(UUID userID) {
         this.userID = userID;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 }

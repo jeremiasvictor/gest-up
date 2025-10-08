@@ -29,15 +29,11 @@ public class BusinessService implements IBusinessService{
         Optional<User> optionalUser = userRepository.findById(idUsuario);
         if (optionalUser.isEmpty()) { throw new NotFoundUserException(); }
 
-        List<Business> businesses = businessRepository.findByColumn(idUsuario); // Lista trazida pelo repository
+        List<Business> businesses = businessRepository.findByColumn(idUsuario); // Lista tragada pelo repository
         List<BusinessDTO> businessDTOS = new ArrayList<>(); // Lista que vai ser enviada para a controller, sem o parâmetro User.
 
-        //
-        //Espaço para mapear a List<Product> de cada business para uma List<ProductDTO>, pois assim evita erros de serialização infinita do JSON.
-        //
-
         for (Business business : businesses) {
-            businessDTOS.add(new BusinessDTO(business.getId(), business.getName(), business.getCnpj(), business.getAddress(), business.getProduct() /* A List<ProductDTO entraria aqui. >*/));
+            businessDTOS.add(new BusinessDTO(business.getId(), business.getName(), business.getCnpj(), business.getAddress()));
         }
 
         return businessDTOS;
@@ -49,10 +45,9 @@ public class BusinessService implements IBusinessService{
         Optional<User> optionalUser = userRepository.findById(createBusinessDTO.getUserID());
         if (optionalUser.isEmpty()) { throw new NotFoundUserException(); }
 
-        Business business = new Business(createBusinessDTO.getName(), createBusinessDTO.getCnpj(), createBusinessDTO.getAddress(), optionalUser.get(),createBusinessDTO.getProducts());
+        Business business = new Business(createBusinessDTO.getName(), createBusinessDTO.getCnpj(), createBusinessDTO.getAddress(), optionalUser.get());
         businessRepository.save(business);
 
-        return new BusinessDTO(business.getId(), business.getName(), business.getCnpj(), business.getAddress(), business.getProduct());
-
+        return new BusinessDTO(business.getId(), business.getName(), business.getCnpj(), business.getAddress());
     }
 }

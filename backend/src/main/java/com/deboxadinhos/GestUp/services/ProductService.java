@@ -25,11 +25,11 @@ public class ProductService implements IProductService{
     @Autowired
     BusinessRepository businessRepository;
     @Override
-    public ProductDTO createProduct(CreateProductDTO small_product) {
+    public ProductDTO createProduct(CreateProductDTO createProductDTO) {
 
-        Optional<Business> business = businessRepository.findById(small_product.getBusiness_id());
+        Optional<Business> business = businessRepository.findById(createProductDTO.getBusiness_id());
 
-        Product product = new Product(small_product.getName(), small_product.getQuantity(), small_product.getPrice(), business.get());
+        Product product = new Product(createProductDTO.getName(), createProductDTO.getQuantity(), createProductDTO.getPrice(), business.get());
         productRepository.save(product);
 
         return new ProductDTO(product.getId(),product.getName(), product.getQuantity(), product.getPrice());
@@ -38,48 +38,55 @@ public class ProductService implements IProductService{
     @Override
     public ProductDTO updateProduct(ProductDTO productDTO) throws ProductNotFoundException {
 
-        Product product_back;
+        Product productToUpdate;
         Optional<Product> optionalProduct = productRepository.findById(productDTO.getId());
 
         if (optionalProduct.isPresent()){
-            product_back = optionalProduct.get();
-        }else{
-            throw new ProductNotFoundException("Existe nao man");
+            productToUpdate = optionalProduct.get();
+        } else {
+            throw new ProductNotFoundException();
         }
 
-        product_back.setName(productDTO.getName());
-        product_back.setPrice(productDTO.getPrice());
-        product_back.setQuantity(productDTO.getQuantity());
+        productToUpdate.setName(productDTO.getName());
+        productToUpdate.setPrice(productDTO.getPrice());
+        productToUpdate.setQuantity(productDTO.getQuantity());
 
-        productRepository.save(product_back);
+        productRepository.save(productToUpdate);
 
-        return new ProductDTO(product_back.getId(),product_back.getName(), product_back.getQuantity(), product_back.getPrice());
+        return new ProductDTO(productToUpdate.getId(), productToUpdate.getName(), productToUpdate.getQuantity(), productToUpdate.getPrice());
     }
 
     @Override
     public List<ProductDTO> listProductByBusinessId(UUID businessId){
 
         List<Product> productList = productRepository.findByColumn(businessId);
-
-        List<ProductDTO> productDtosList= new ArrayList<>();
+        List<ProductDTO> productDTOSList= new ArrayList<>();
 
         for(Product product: productList){
-            productDtosList.add(new ProductDTO(product.getId(),product.getName(), product.getQuantity(), product.getPrice()));
+            productDTOSList.add(new ProductDTO(product.getId(),product.getName(), product.getQuantity(), product.getPrice()));
         }
-        return productDtosList;
+        return productDTOSList;
     }
 
     @Override
-    public void deleteProductById(UUID idBusiness,UUID idProduct) throws ProductNotFoundException {
+    public void deleteProductById(UUID idProduct) throws ProductNotFoundException {
 
-        List<ProductDTO> products = listProductByBusinessId(idBusiness);
+        Optional<Product> product = productRepository.findById(idProduct);
 
-        for (ProductDTO product : products ){
-            if(idProduct.equals(product.getId())){
-                productRepository.deleteById(idProduct);
-                return;
-            }
+        if (product.isEmpty()) {
+            throw new ProductNotFoundException();
+        } else {
+            productRepository.deleteById(product.get().getId());
         }
-        throw new ProductNotFoundException("not found");
+
+//        List<ProductDTO> products = listProductByBusinessId(idBusiness);
+//
+//        for (ProductDTO product : products ){
+//            if(idProduct.equals(product.getId())){
+//                productRepository.deleteById(idProduct);
+//                return;
+//            }
+//        }
+//        throw new ProductNotFoundException("not found");
     }
 }

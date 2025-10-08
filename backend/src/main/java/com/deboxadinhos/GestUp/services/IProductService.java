@@ -12,5 +12,5 @@ public interface IProductService {
     ProductDTO createProduct(CreateProductDTO createProductDTO);
     ProductDTO updateProduct(ProductDTO product);
     List<ProductDTO> listProductByBusinessId(UUID businessId);
-    void deleteProductById(UUID idBusiness, UUID idProduct);
+    void deleteProductById(UUID idProduct);
 }

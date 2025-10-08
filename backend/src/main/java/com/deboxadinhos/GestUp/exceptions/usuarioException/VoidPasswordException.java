@@ -7,7 +7,7 @@ public class VoidPasswordException extends RuntimeException {
     }
 
     public VoidPasswordException() {
-        super("Put Password");
+        super("Put a password.");
     }
 }
 
