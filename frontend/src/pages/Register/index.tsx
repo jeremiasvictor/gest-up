@@ -40,7 +40,7 @@ function Register() {
     }
 
     try {
-      const response = await api.post("/usuario", {
+      const response = await api.post("/user", {
         nome: completeName,
         email: email,
         senha: password,

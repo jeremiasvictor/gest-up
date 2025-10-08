@@ -30,7 +30,7 @@ function Login() {
     const password = inputPassword.current?.value || "";
 
     try {
-      const response = await api.post("/usuario/login", {
+      const response = await api.post("/user/login", {
         email: email,
         senha: password,
       });
