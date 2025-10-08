@@ -1,6 +1,6 @@
 package com.deboxadinhos.GestUp.services;
 
-import com.deboxadinhos.GestUp.dto.CreateUserDto;
+import com.deboxadinhos.GestUp.dto.CreateUserDTO;
 import com.deboxadinhos.GestUp.dto.ResponseUserDTO;
 import com.deboxadinhos.GestUp.exceptions.usuarioException.*;
 import com.deboxadinhos.GestUp.models.User;
@@ -18,7 +18,7 @@ public class UserService implements IUserService {
     private UserRepository userRepository;
 
     public List<User> findAll() { return userRepository.findAll(); }
-    public ResponseUserDTO doLogin(CreateUserDto userRequested) {
+    public ResponseUserDTO doLogin(CreateUserDTO userRequested) {
         //Valida a sintaxe do email.
         authenticateEmail(userRequested.getEmail());
 
@@ -36,7 +36,7 @@ public class UserService implements IUserService {
         return new ResponseUserDTO(userInBank.getId(), userInBank.getName(), userInBank.getEmail()) ;
     }
 
-    public ResponseUserDTO doRegister(CreateUserDto userResquested){
+    public ResponseUserDTO doRegister(CreateUserDTO userResquested){
         authenticateEmail(userResquested.getEmail());
 
         Optional<User> optionalUser = userRepository.findByEmail(userResquested.getEmail());
