@@ -9,10 +9,8 @@ import com.deboxadinhos.GestUp.models.Product;
 import com.deboxadinhos.GestUp.repository.BusinessRepository;
 import com.deboxadinhos.GestUp.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -69,5 +67,19 @@ public class ProductService implements IProductService{
             productDtosList.add(new ProductDTO(product.getId(),product.getName(), product.getQuantity(), product.getPrice()));
         }
         return productDtosList;
+    }
+
+    @Override
+    public void deleteProductById(UUID idBusiness,UUID idProduct) throws ProductNotFoundException {
+
+        List<ProductDTO> products = listProductByBusinessId(idBusiness);
+
+        for (ProductDTO product : products ){
+            if(idProduct.equals(product.getId())){
+                productRepository.deleteById(idProduct);
+                return;
+            }
+        }
+        throw new ProductNotFoundException("not found");
     }
 }

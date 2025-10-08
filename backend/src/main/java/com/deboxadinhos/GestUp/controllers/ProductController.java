@@ -2,6 +2,7 @@ package com.deboxadinhos.GestUp.controllers;
 
 import com.deboxadinhos.GestUp.dto.CreateBusinessDTO;
 import com.deboxadinhos.GestUp.dto.CreateProductDTO;
+import com.deboxadinhos.GestUp.dto.IdOperationsDTO;
 import com.deboxadinhos.GestUp.dto.ProductDTO;
 import com.deboxadinhos.GestUp.models.Product;
 import com.deboxadinhos.GestUp.repository.ProductRepository;
@@ -34,8 +35,14 @@ public class ProductController {
 
     @PostMapping("/updateProduct")
     public ResponseEntity<?> updateProduct(@RequestBody ProductDTO productDTO){
-
         return ResponseEntity.status(HttpStatus.OK).body(productService.updateProduct(productDTO));
+    }
+
+    @DeleteMapping
+    public  ResponseEntity<?> deleteProduct(@RequestBody IdOperationsDTO idOperationsDTO){
+
+        productService.deleteProductById(idOperationsDTO.getBusinessId(),idOperationsDTO.getProductId());
+        return ResponseEntity.status(HttpStatus.OK).body("deleted");
     }
 
 }
