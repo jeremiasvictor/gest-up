@@ -11,9 +11,9 @@ function Header() {
     <header className={styles.header}>
       <nav className={styles.navContainer}>
         <div className={styles.headerLeft}>
-          <button className={styles.menu}>
+          {/* <button className={styles.menu}>
             <FaBars className={styles.FaBars} />
-          </button>
+          </button> */}
 
           <a href="/" className={styles.gestupLogo}>
             <img src="../../../public/com-sombra.png" alt="Logo Image" />

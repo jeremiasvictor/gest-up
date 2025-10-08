@@ -17,7 +17,10 @@ public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> findAll() { return userRepository.findAll(); }
+    @Override
+    public List<User> findAll() throws NotFoundUserException, InvalidPasswordException{ return userRepository.findAll(); }
+
+    @Override
     public ResponseUserDTO doLogin(CreateUserDTO userRequested) {
         //Valida a sintaxe do email.
         authenticateEmail(userRequested.getEmail());
@@ -26,7 +29,7 @@ public class UserService implements IUserService {
         User userInBank;
         Optional<User> optionalUser = userRepository.findByEmail(userRequested.getEmail());
 
-        //Se tem algo no optional (não é nulo e só pode ser user), tire para fora e atribua no userInBank, se não, jogue a exceção.
+        //Se tem algo no optional (não é nulo e só pode ser user), tire e atribua no userInBank, se não, jogue a exceção.
         if (optionalUser.isPresent()) { userInBank = optionalUser.get(); }
         else { throw new NotFoundUserException(); }
 
@@ -36,9 +39,10 @@ public class UserService implements IUserService {
         return new ResponseUserDTO(userInBank.getId(), userInBank.getName(), userInBank.getEmail()) ;
     }
 
+    @Override
     public ResponseUserDTO doRegister(CreateUserDTO userResquested){
-        authenticateEmail(userResquested.getEmail());
 
+        authenticateEmail(userResquested.getEmail());
         Optional<User> optionalUser = userRepository.findByEmail(userResquested.getEmail());
 
         if (optionalUser.isPresent()) {
@@ -57,5 +61,4 @@ public class UserService implements IUserService {
             throw new InvalidEmailException();
         }
     }
-
 }

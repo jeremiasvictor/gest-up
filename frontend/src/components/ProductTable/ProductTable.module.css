@@ -18,7 +18,7 @@
   width: 30%;
 } /* coluna name */
 .productTable th:nth-child(2) {
-  width: 10%;
+  width: 20%;
 } /* coluna ID */
 .productTable th:nth-child(3) {
   width: 15%;
@@ -26,17 +26,11 @@
 .productTable th:nth-child(4) {
   width: 20%;
 } /* coluna quantity */
-.productTable th:nth-child(5) {
-  width: 15%;
-} /* coluna balance */
-.productTable th:nth-child(6) {
-  width: 10%;
-} /* icon */
 
 .productTable th {
   padding: 16px 24px;
   text-align: left;
-  color: #a9a9b2;
+  color: var(--text);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -59,20 +53,20 @@
 }
 
 .inStock {
-  background-color: rgba(3, 166, 115, 0.1);
-  color: #03a673;
+  background-color: var(--quantity-green-bg);
+  color: var(--quantity-green-text);
 }
 .lowStock {
-  background-color: rgba(255, 184, 0, 0.1);
-  color: #ffb800;
+  background-color: var(--quantity-yellow-bg);
+  color: var(--quantity-yellow-text);
 }
 .noStock {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
+  background-color: var(--quantity-red-bg);
+  color: var(--quantity-red-text);
 }
 .service {
-  background-color: rgba(167, 155, 222, 0.1);
-  color: #a79bde;
+  background-color: var(--quantity-purple-bg);
+  color: var(--quantity-purple-text);
 }
 
 .actionsCell {
@@ -83,7 +77,7 @@
 .actionsButton {
   background: none;
   border: none;
-  color: #a9a9b2;
+  color: var(--text);
   font-size: 16px;
   cursor: pointer;
   padding: 8px;
@@ -92,12 +86,12 @@
 
 /* impares */
 .productTable tbody tr:nth-child(odd) {
-  background-color: #131215;
+  background-color: var(--table-child-odd);
 }
 
 /* pares */
 .productTable tbody tr:nth-child(even) {
-  background-color: #1c1b23;
+  background-color: var(--table-child-even);
 }
 
 .productTable td:first-child {
@@ -111,5 +105,5 @@
 }
 
 .productTable tbody tr:hover td {
-  background-color: #2c264a;
+  background-color: var(--table-child-hover);
 }

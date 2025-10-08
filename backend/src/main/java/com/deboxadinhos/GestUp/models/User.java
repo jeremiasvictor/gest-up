@@ -19,6 +19,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     private String cpf;
+
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonManagedReference
     private List<Business> business;

@@ -23,7 +23,17 @@ public class Business {
     private User user;
 
     @OneToMany(mappedBy = "business", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
     private List<Product> product;
+
+    public Business(){}
+    public Business(String name, String cnpj, String address, User user, List<Product> product) {
+        this.name = name;
+        this.cnpj = cnpj;
+        this.address = address;
+        this.user = user;
+        this.product = product;
+    }
 
     public String getCnpj() {
         return cnpj;

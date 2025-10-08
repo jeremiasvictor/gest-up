@@ -53,10 +53,10 @@ function ProductTable() {
       <thead>
         <tr>
           <th>Name</th>
-          <th>ID</th>
+          {/* <th>ID</th> */}
           <th>Value</th>
           <th>Quantity</th>
-          <th>Balance</th>
+          {/* <th>Balance</th> */}
           <th></th>
         </tr>
       </thead>
@@ -66,7 +66,7 @@ function ProductTable() {
             <td className={styles.productNameCell} title={product.name}>
               {product.name}
             </td>
-            <td>{product.id}</td>
+            {/* <td>{product.id}</td> */}
             <td>{`R$ ${product.value.toFixed(2).replace(".", ",")}`}</td>
             <td>
               <span
