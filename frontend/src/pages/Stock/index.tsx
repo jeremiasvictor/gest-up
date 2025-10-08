@@ -21,10 +21,10 @@ function Stock() {
           }
           secondaryActions={
             <>
-              <button className={actionBarStyles.secondaryButton}>
+              {/* <button className={actionBarStyles.secondaryButton}>
                 <FaSort />
                 <span>Sort</span>
-              </button>
+              </button> */}
               <button className={actionBarStyles.secondaryButton}>
                 <FaFilter />
                 <span>Filter</span>

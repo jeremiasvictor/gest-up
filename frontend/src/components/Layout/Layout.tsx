@@ -8,7 +8,7 @@ function Layout() {
     <div className={styles.appLayout}>
       <Header />
       <div className={styles.appBody}>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <main className={styles.mainContent}>
           <Outlet />
         </main>

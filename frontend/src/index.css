@@ -18,19 +18,76 @@ body,
   height: 100%;
 }
 
+:root {
+  --background: #0c0c0d;
+  --text: #c8c5c1;
+  --border: #48456c;
+
+  /* botoes */
+  --buttons-bg: #2c264a;
+  --secondary-color: #a79bde;
+  --buttons-hover: #3a325e;
+  --search-bg: #121114;
+
+  /* scrollbar */
+  --scrollbar-track: #171425;
+  --scrollbar-thumb: #48456c;
+  --scrollbar-thumb-hover: #a79bde;
+
+  /* tabela */
+  --table-child-odd: #131215;
+  --table-child-even: #1c1b23;
+  --table-child-hover: #2c264a;
+  --table-light-primary: rgba(91, 71, 192, 0.3);
+  --table-light-secondary: rgba(167, 155, 222, 0);
+
+  --quantity-green-bg: rgba(3, 166, 115, 0.1);
+  --quantity-green-text: #03a673;
+  --quantity-yellow-bg: rgba(255, 184, 0, 0.1);
+  --quantity-yellow-text: #ffb800;
+  --quantity-red-bg: rgba(239, 68, 68, 0.1);
+  --quantity-red-text: #ef4444;
+  --quantity-purple-bg: rgba(167, 155, 222, 0.1);
+  --quantity-purple-text: #a79bde;
+}
+
+html.light {
+  --background: #c8c5c1;
+  --text: #0c0c0d;
+  --border: #48456c;
+
+  /* botoes */
+  --buttons-bg: #a79bde;
+  --secondary-color: #2c264a;
+  --buttons-hover: #9084c3;
+  --search-bg: #9b9a9a;
+
+  /* scrollbar */
+  --scrollbar-track: #9b9a9a;
+  --scrollbar-thumb: #a79bde;
+  --scrollbar-thumb-hover: #2c264a;
+
+  /* tabela */
+  --table-child-odd: #7e7e7e;
+  --table-child-even: #9b9a9a;
+  --table-child-hover: #a79bde;
+  --table-light-primary: rgba(91, 71, 192, 0.3);
+  --table-light-secondary: rgba(167, 155, 222, 0);
+
+  --quantity-green-bg: rgba(4, 95, 66, 0.326);
+  --quantity-green-text: #00dd93;
+  --quantity-yellow-bg: rgba(201, 145, 3, 0.144);
+  --quantity-yellow-text: #ffd876;
+  --quantity-red-bg: rgba(239, 68, 68, 0.1);
+  --quantity-red-text: #9e2222;
+  --quantity-purple-bg: rgba(167, 155, 222, 0.249);
+  --quantity-purple-text: #6651cd;
+}
+
 body {
   min-height: 100vh;
   width: 100vw;
-}
-
-html.light body {
-  background-color: #c8c5c1;
-  color: #0c0c0d;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-html.dark body {
-  background: #0c0c0d;
-  color: #c8c5c1;
+  background-color: var(--background);
+  color: var(--text);
   transition: background-color 0.3s, color 0.3s;
 }

@@ -5,9 +5,9 @@
   flex: 1;
   min-height: 0;
   border-radius: 40px 40px 0 0;
-  border-top: 1px solid #48456c;
-  border-left: 1px solid #48456c;
-  border-right: 1px solid #48456c;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
   border-bottom: none;
   overflow: hidden;
 }
@@ -23,7 +23,7 @@
 }
 
 .cardContent > *:first-child {
-  border-bottom: 1px solid #48456c;
+  border-bottom: 1px solid var(--border);
   padding-bottom: 24px;
   margin-bottom: 24px;
 }
@@ -36,8 +36,8 @@
   width: 1000px;
   background: radial-gradient(
     ellipse at center,
-    rgba(91, 71, 192, 0.3) 0%,
-    rgba(167, 155, 222, 0) 70%
+    var(--table-light-primary) 0%,
+    var(--table-light-secondary) 70%
   );
   opacity: 0.5;
   z-index: -1;

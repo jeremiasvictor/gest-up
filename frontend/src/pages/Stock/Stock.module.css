@@ -9,6 +9,7 @@
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  padding-right: 30px;
 }
 
 .tableWrapper::-webkit-scrollbar {
@@ -16,15 +17,15 @@
 }
 
 .tableWrapper::-webkit-scrollbar-track {
-  background: #171425;
+  background: var(--scrollbar-track);
   border-radius: 4px;
 }
 
 .tableWrapper::-webkit-scrollbar-thumb {
-  background-color: #48456c;
+  background-color: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 
 .tableWrapper::-webkit-scrollbar-thumb:hover {
-  background-color: #a79bde;
+  background-color: var(--scrollbar-thumb-hover);
 }

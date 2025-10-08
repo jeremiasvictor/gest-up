@@ -15,7 +15,7 @@ function Sidebar() {
       <nav>
         <h1 className={styles.navTitle}>General</h1>
         <ul className={styles.navList}>
-          <li>
+          {/* <li>
             <NavLink
               to="/"
               end
@@ -28,7 +28,7 @@ function Sidebar() {
               <FaLayerGroup />
               <span>Dashboard</span>
             </NavLink>
-          </li>
+          </li> */}
 
           <li>
             <NavLink
@@ -44,7 +44,7 @@ function Sidebar() {
             </NavLink>
           </li>
 
-          <li>
+          {/* <li>
             <NavLink
               to="/sales"
               className={({ isActive }) =>
@@ -56,9 +56,9 @@ function Sidebar() {
               <FaCheckToSlot />
               <span>Sales</span>
             </NavLink>
-          </li>
+          </li> */}
 
-          <li>
+          {/* <li>
             <NavLink
               to="/clients"
               className={({ isActive }) =>
@@ -70,7 +70,7 @@ function Sidebar() {
               <FaFaceSmile />
               <span>Clients</span>
             </NavLink>
-          </li>
+          </li> */}
 
           <li className={styles.settings}>
             <NavLink

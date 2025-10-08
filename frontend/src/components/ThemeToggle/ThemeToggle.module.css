@@ -23,33 +23,33 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #2a2a3e;
+  background-color: var(--buttons-bg);
   transition: 0.4s;
   border-radius: 34px;
-  border: 2px solid #3c3c5a;
+  border: 2px solid var(--secondary-color);
   padding: 2px;
 }
 
 .slider.light {
-  background-color: #bbd0ff;
-  border-color: #9cbaff;
+  background-color: var(--buttons-bg);
+  border-color: var(--secondary-color);
 }
 
 .iconWrapper {
   position: relative;
   height: 30px;
   width: 30px;
-  background-color: #9a7bff;
+  background-color: var(--buttons-bg);
   transition: 0.4s;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .iconWrapper.light {
-  background-color: #8c7bff;
+  background-color: var(--buttons-bg);
 }
 
 .iconWrapper.checked {
