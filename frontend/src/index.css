@@ -22,11 +22,14 @@ body,
   --background: #0c0c0d;
   --text: #c8c5c1;
   --border: #48456c;
+  --modal-bg-color: rgba(0, 0, 0, 0.7);
 
   /* botoes */
   --buttons-bg: #2c264a;
+  --buttons-bg-secondary: #1e1e1f;
   --secondary-color: #a79bde;
   --buttons-hover: #3a325e;
+  --buttons-secondary-hover: #131313;
   --search-bg: #121114;
 
   /* scrollbar */
@@ -55,11 +58,14 @@ html.light {
   --background: #c8c5c1;
   --text: #0c0c0d;
   --border: #48456c;
+  --modal-bg-color: rgba(139, 139, 139, 0.7);
 
   /* botoes */
   --buttons-bg: #a79bde;
+  --buttons-bg-secondary: #858589;
   --secondary-color: #2c264a;
   --buttons-hover: #9084c3;
+  --buttons-secondary-hover: #adadb3;
   --search-bg: #9b9a9a;
 
   /* scrollbar */

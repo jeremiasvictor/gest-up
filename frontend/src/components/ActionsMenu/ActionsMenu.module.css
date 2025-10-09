@@ -1,0 +1,34 @@
+.menuContainer {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 8px;
+  background-color: var(--buttons-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.menuList {
+  list-style: none;
+  padding: 8px;
+  margin: 0;
+}
+
+.menuList li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+/* .menuList li:hover {
+  background-color: var(--accent-color);
+  color: var(--accent-text-color);
+} */

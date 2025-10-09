@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import styles from "./ProductTable.module.css";
+import Modal from "../Modal/Modal";
+import ActionsMenu from "../ActionsMenu/ActionsMenu";
 import { FaEllipsisV } from "react-icons/fa";
 
 const mockProducts = [
@@ -22,6 +24,13 @@ const mockProducts = [
 
 function ProductTable() {
   const [products, setProducts] = useState(mockProducts);
+
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
+
+  const [openMenuId, setOpenMenuId] = useState<number | null>(null);
+
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
 
   // buscar dados reais do back
   /*
@@ -48,45 +57,111 @@ function ProductTable() {
     return `${quantity} un.`;
   };
 
+  //abrir/fechar o menu de ações de uma linha específica
+  const handleMenuToggle = (productId: number) => {
+    //se o menu clicado já estiver aberto, fecha, se não, abre
+    setOpenMenuId(openMenuId === productId ? null : productId);
+  };
+
+  const handleOpenDeleteModal = (product: any) => {
+    setSelectedProduct(product);
+    setDeleteModalOpen(true);
+    setOpenMenuId(null);
+  };
+
+  const handleDelete = () => {
+    //lógica para chamar a API e deletar
+    setDeleteModalOpen(false);
+  };
+
+  const handleOpenEditModal = (product: any) => {
+    setSelectedProduct(product);
+    setEditModalOpen(true);
+    setOpenMenuId(null);
+  };
+
   return (
-    <table className={styles.productTable}>
-      <thead>
-        <tr>
-          <th>Name</th>
-          {/* <th>ID</th> */}
-          <th>Value</th>
-          <th>Quantity</th>
-          {/* <th>Balance</th> */}
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {products.map((product) => (
-          <tr key={product.id}>
-            <td className={styles.productNameCell} title={product.name}>
-              {product.name}
-            </td>
-            {/* <td>{product.id}</td> */}
-            <td>{`R$ ${product.value.toFixed(2).replace(".", ",")}`}</td>
-            <td>
-              <span
-                className={`${styles.stockStatus} ${getStockStatusClass(
-                  product.quantity
-                )}`}
-              >
-                {formatStock(product.quantity)}
-              </span>
-            </td>
-            <td></td>
-            <td className={styles.actionsCell}>
-              <button className={styles.actionsButton}>
-                <FaEllipsisV />
-              </button>
-            </td>
+    <>
+      <table className={styles.productTable}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            {/* <th>ID</th> */}
+            <th>Value</th>
+            <th>Quantity</th>
+            {/* <th>Balance</th> */}
+            <th></th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {products.map((product) => (
+            <tr key={product.id}>
+              <td className={styles.productNameCell} title={product.name}>
+                {product.name}
+              </td>
+              {/* <td>{product.id}</td> */}
+              <td>{`R$ ${product.value.toFixed(2).replace(".", ",")}`}</td>
+              <td>
+                <span
+                  className={`${styles.stockStatus} ${getStockStatusClass(
+                    product.quantity
+                  )}`}
+                >
+                  {formatStock(product.quantity)}
+                </span>
+              </td>
+              <td></td>
+              <td className={styles.actionsCell}>
+                <button
+                  className={styles.actionsButton}
+                  onClick={() => handleMenuToggle(product.id)}
+                >
+                  <FaEllipsisV />
+                </button>
+
+                {openMenuId === product.id && (
+                  <ActionsMenu
+                    onEdit={() => handleOpenEditModal(product)}
+                    onDelete={() => handleOpenDeleteModal(product)}
+                  />
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+      >
+        <h2>Confirmar Exclusão</h2>
+        <p>
+          Você tem certeza que deseja excluir
+          <strong> {selectedProduct?.name}</strong>?
+        </p>
+        <div className={styles.deleteModalButtons}>
+          <button
+            onClick={() => setDeleteModalOpen(false)}
+            className={styles.cancelButton}
+          >
+            Cancelar
+          </button>
+          <button onClick={handleDelete} className={styles.deleteButton}>
+            Excluir
+          </button>
+        </div>
+      </Modal>
+
+      <Modal isOpen={isEditModalOpen} onClose={() => setEditModalOpen(false)}>
+        <h2>Editar Produto</h2>
+        <p>
+          Formulário de edição para <strong>{selectedProduct?.name}</strong>{" "}
+          aqui.
+        </p>
+        {/*formulário de edição*/}
+      </Modal>
+    </>
   );
 }
 

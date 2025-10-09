@@ -70,8 +70,17 @@
 }
 
 .actionsCell {
+  width: 1%;
   white-space: nowrap; /* impede a quebra de linha */
   text-align: right;
+  position: relative;
+}
+
+.deleteModalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 .actionsButton {
@@ -82,6 +91,30 @@
   cursor: pointer;
   padding: 8px;
   transition: background-color 0.2s;
+}
+
+.cancelButton {
+  color: var(--text);
+  background: var(--buttons-bg-secondary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.cancelButton:hover {
+  background: var(--buttons-secondary-hover);
+}
+
+.deleteButton {
+  color: var(--text);
+  background: var(--buttons-bg);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.deleteButton:hover {
+  background: var(--buttons-hover);
 }
 
 /* impares */

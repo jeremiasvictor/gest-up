@@ -29,3 +29,51 @@
 .tableWrapper::-webkit-scrollbar-thumb:hover {
   background-color: var(--scrollbar-thumb-hover);
 }
+
+.newProductModalInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  margin: 40px 0;
+}
+
+.newProductModalInputs input {
+  background-color: var(--table-child-even);
+  border: none;
+  color: var(--text);
+  height: 40px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.newProductModalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cancelButton {
+  color: var(--text);
+  background: var(--buttons-bg-secondary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.cancelButton:hover {
+  background: var(--buttons-secondary-hover);
+}
+
+.createButton {
+  color: var(--text);
+  background: var(--buttons-bg);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.createButton:hover {
+  background: var(--buttons-hover);
+}
