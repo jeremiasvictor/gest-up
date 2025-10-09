@@ -5,5 +5,5 @@ public class InvalidEmailException extends RuntimeException {
         super(message);
     }
 
-    public InvalidEmailException(){ super("Something went wrong"); }
+    public InvalidEmailException(){ super("Something went wrong."); }
 }

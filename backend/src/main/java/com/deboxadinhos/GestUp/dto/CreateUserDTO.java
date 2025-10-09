@@ -1,14 +1,14 @@
 package com.deboxadinhos.GestUp.dto;
 
-public class CreateUserDto {
+public class CreateUserDTO {
 
     private String name;
     private String email;
     private String password;
 
-    CreateUserDto() {}
+    CreateUserDTO() {}
 
-    public CreateUserDto(String name, String email, String password) {
+    public CreateUserDTO(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;

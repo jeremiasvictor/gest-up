@@ -1,6 +1,6 @@
 package com.deboxadinhos.GestUp.controllers;
 
-import com.deboxadinhos.GestUp.dto.CreateUserDto;
+import com.deboxadinhos.GestUp.dto.CreateUserDTO;
 import com.deboxadinhos.GestUp.models.User;
 import com.deboxadinhos.GestUp.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> registerUser(@RequestBody CreateUserDto user){
+    public ResponseEntity<?> registerUser(@RequestBody CreateUserDTO user){
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.doRegister(user));
     }
 
     // Recebe a resposta do front end e cria um objeto usuario
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody CreateUserDto user){
+    public ResponseEntity<?> loginUser(@RequestBody CreateUserDTO user){
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.doLogin(user));
     }
 

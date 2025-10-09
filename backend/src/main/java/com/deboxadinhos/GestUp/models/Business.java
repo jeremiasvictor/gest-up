@@ -2,6 +2,8 @@ package com.deboxadinhos.GestUp.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,15 +25,16 @@ public class Business {
     private User user;
 
     @OneToMany(mappedBy = "business", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
     private List<Product> product;
 
     public Business(){}
-    public Business(String name, String cnpj, String address, User user, List<Product> product) {
+    public Business(String name, String cnpj, String address, User user) {
         this.name = name;
         this.cnpj = cnpj;
         this.address = address;
         this.user = user;
-        this.product = product;
+        this.product = new ArrayList<>();
     }
 
     public String getCnpj() {

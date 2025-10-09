@@ -1,6 +1,6 @@
 package com.deboxadinhos.GestUp.services;
 
-import com.deboxadinhos.GestUp.dto.CreateUserDto;
+import com.deboxadinhos.GestUp.dto.CreateUserDTO;
 import com.deboxadinhos.GestUp.dto.ResponseUserDTO;
 import com.deboxadinhos.GestUp.exceptions.usuarioException.*;
 import com.deboxadinhos.GestUp.models.User;
@@ -21,7 +21,7 @@ public class UserService implements IUserService {
     public List<User> findAll() throws NotFoundUserException, InvalidPasswordException{ return userRepository.findAll(); }
 
     @Override
-    public ResponseUserDTO doLogin(CreateUserDto userRequested) {
+    public ResponseUserDTO doLogin(CreateUserDTO userRequested) {
         //Valida a sintaxe do email.
         authenticateEmail(userRequested.getEmail());
 
@@ -29,7 +29,7 @@ public class UserService implements IUserService {
         User userInBank;
         Optional<User> optionalUser = userRepository.findByEmail(userRequested.getEmail());
 
-        //Se tem algo no optional (não é nulo e só pode ser user), tire para fora e atribua no userInBank, se não, jogue a exceção.
+        //Se tem algo no optional (não é nulo e só pode ser user), tire e atribua no userInBank, se não, jogue a exceção.
         if (optionalUser.isPresent()) { userInBank = optionalUser.get(); }
         else { throw new NotFoundUserException(); }
 
@@ -40,7 +40,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ResponseUserDTO doRegister(CreateUserDto userResquested){
+    public ResponseUserDTO doRegister(CreateUserDTO userResquested){
 
         authenticateEmail(userResquested.getEmail());
         Optional<User> optionalUser = userRepository.findByEmail(userResquested.getEmail());

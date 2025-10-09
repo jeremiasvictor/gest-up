@@ -29,11 +29,8 @@ public class BusinessController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(businessService.findBusinessesByUserId(userid));
     }
 
-
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> createBusiness(@RequestBody CreateBusinessDTO business) {
         return ResponseEntity.status(HttpStatus.CREATED).body(businessService.createBusiness(business));
     }
-
 }
