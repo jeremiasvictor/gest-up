@@ -3,6 +3,7 @@ import api from "../../services/api";
 import styles from "./ProductTable.module.css";
 import Modal from "../Modal/Modal";
 import ActionsMenu from "../ActionsMenu/ActionsMenu";
+import EditProductForm from "../EditProductForm/EditProductForm";
 import { FaEllipsisV } from "react-icons/fa";
 
 const mockProducts = [
@@ -80,6 +81,12 @@ function ProductTable() {
     setOpenMenuId(null);
   };
 
+  const handleUpdateProduct = (updatedProduct: any) => {
+    console.log("Salvando produto atualizado:", updatedProduct);
+    // Aqui viria a chamada para a API (ex: api.put(`/produtos/${updatedProduct.id}`, updatedProduct))
+    setEditModalOpen(false);
+  };
+
   return (
     <>
       <table className={styles.productTable}>
@@ -135,31 +142,37 @@ function ProductTable() {
         isOpen={isDeleteModalOpen}
         onClose={() => setDeleteModalOpen(false)}
       >
-        <h2>Confirmar Exclusão</h2>
-        <p>
-          Você tem certeza que deseja excluir
-          <strong> {selectedProduct?.name}</strong>?
-        </p>
-        <div className={styles.deleteModalButtons}>
-          <button
-            onClick={() => setDeleteModalOpen(false)}
-            className={styles.cancelButton}
-          >
-            Cancelar
-          </button>
-          <button onClick={handleDelete} className={styles.deleteButton}>
-            Excluir
-          </button>
+        <div className={styles.deleteModal}>
+          <h2>Confirmar Exclusão</h2>
+          <p>
+            Você tem certeza que deseja excluir
+            <strong> {selectedProduct?.name}</strong>?
+          </p>
+          <div className={styles.deleteModalButtons}>
+            <button
+              onClick={() => setDeleteModalOpen(false)}
+              className={styles.cancelButton}
+            >
+              Cancelar
+            </button>
+            <button onClick={handleDelete} className={styles.deleteButton}>
+              Excluir
+            </button>
+          </div>
         </div>
       </Modal>
 
       <Modal isOpen={isEditModalOpen} onClose={() => setEditModalOpen(false)}>
-        <h2>Editar Produto</h2>
-        <p>
-          Formulário de edição para <strong>{selectedProduct?.name}</strong>{" "}
-          aqui.
-        </p>
-        {/*formulário de edição*/}
+        <div className={styles.editModal}>
+          <h2>Editar Produto</h2>
+          {selectedProduct && (
+            <EditProductForm
+              productToEdit={selectedProduct}
+              onSave={handleUpdateProduct}
+              onCancel={() => setEditModalOpen(false)}
+            />
+          )}
+        </div>
       </Modal>
     </>
   );
