@@ -4,34 +4,25 @@ import styles from "./ProductTable.module.css";
 import Modal from "../Modal/Modal";
 import ActionsMenu from "../ActionsMenu/ActionsMenu";
 import EditProductForm from "../EditProductForm/EditProductForm";
-import { FaEllipsisV } from "react-icons/fa";
+import { FaEllipsisV, FaSearchMinus } from "react-icons/fa";
 
-const mockProducts = [
-  { id: 1, name: "Bolo de Pote de Morango", value: 12.5, quantity: 10 },
-  { id: 2, name: "Café Especial em Grãos 250g", value: 35.0, quantity: 4 },
-  { id: 3, name: "Caixa de Brownie (6 unidades)", value: 25.0, quantity: 0 },
-  { id: 4, name: "Serviço de Entrega", value: 8.0, quantity: null },
-  { id: 5, name: "Sorvete de flocos", value: 95.0, quantity: 40 },
-  {
-    id: 6,
-    name: "Milkshake Espacial de Morango com chocolate, nozes, paçoca e amendoim",
-    value: 135.0,
-    quantity: 2,
-  },
-  { id: 7, name: "Bolacha recheada", value: 2.0, quantity: 54 },
-  { id: 8, name: "Empadão de frango", value: 17.0, quantity: 123 },
-  { id: 9, name: "Tortilete", value: 33.0, quantity: 1000 },
-];
+interface Product {
+  id: number;
+  name: string;
+  value: number;
+  quantity: number | null;
+}
+interface ProductTableProps {
+  products: Product[];
+}
 
-function ProductTable() {
-  const [products, setProducts] = useState(mockProducts);
-
+function ProductTable({ products }: ProductTableProps) {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
-
   const [openMenuId, setOpenMenuId] = useState<number | null>(null);
-
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
+
+  console.log("DADOS RECEBIDOS PELA TABELA:", products);
 
   // buscar dados reais do back
   /*
@@ -87,6 +78,15 @@ function ProductTable() {
     setEditModalOpen(false);
   };
 
+  if (products.length === 0) {
+    return (
+      <div className={styles.emptyStateContainer}>
+        <FaSearchMinus className={styles.emptyStateIcon} />
+        <h2>Nenhum produto encontrado</h2>
+      </div>
+    );
+  }
+
   return (
     <>
       <table className={styles.productTable}>
@@ -107,7 +107,9 @@ function ProductTable() {
                 {product.name}
               </td>
               {/* <td>{product.id}</td> */}
-              <td>{`R$ ${product.value.toFixed(2).replace(".", ",")}`}</td>
+              <td>{`R$ ${
+                product.value?.toFixed(2).replace(".", ",") || "0,00"
+              }`}</td>
               <td>
                 <span
                   className={`${styles.stockStatus} ${getStockStatusClass(
@@ -117,7 +119,6 @@ function ProductTable() {
                   {formatStock(product.quantity)}
                 </span>
               </td>
-              <td></td>
               <td className={styles.actionsCell}>
                 <button
                   className={styles.actionsButton}

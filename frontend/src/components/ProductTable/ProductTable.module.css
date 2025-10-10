@@ -196,3 +196,26 @@
 .productTable tbody tr:hover td {
   background-color: var(--table-child-hover);
 }
+
+.emptyStateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 40px;
+  color: var(--text);
+  border-radius: 8px;
+}
+
+.emptyStateIcon {
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+
+.emptyStateContainer h2 {
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 8px;
+  font-weight: 600;
+}

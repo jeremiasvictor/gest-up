@@ -6,9 +6,17 @@ interface ActionBarProps {
   title: string;
   primaryAction?: React.ReactNode;
   secondaryActions?: React.ReactNode;
+  searchValue: string;
+  onSearchChange: (value: string) => void;
 }
 
-function ActionBar({ title, primaryAction, secondaryActions }: ActionBarProps) {
+function ActionBar({
+  title,
+  primaryAction,
+  secondaryActions,
+  searchValue,
+  onSearchChange,
+}: ActionBarProps) {
   return (
     <div className={styles.actionBar}>
       <div className={styles.header}>
@@ -19,8 +27,13 @@ function ActionBar({ title, primaryAction, secondaryActions }: ActionBarProps) {
         {" "}
         {primaryAction}
         <div className={styles.searchWrapper}>
-          <input type="text" placeholder="Type in to search..." />
           <FaSearch className={styles.searchIcon} />
+          <input
+            type="text"
+            placeholder="Type in to search..."
+            value={searchValue}
+            onChange={(e) => onSearchChange(e.target.value)}
+          />
         </div>
         <div className={styles.actionsWrapper}>{secondaryActions}</div>
       </div>
