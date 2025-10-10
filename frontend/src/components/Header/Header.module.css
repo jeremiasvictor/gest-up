@@ -52,3 +52,7 @@
   align-items: center;
   padding-bottom: 3px;
 }
+
+.profileContainer {
+  position: relative;
+}

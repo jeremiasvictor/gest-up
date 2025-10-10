@@ -2,12 +2,13 @@
   position: absolute;
   right: 0;
   top: 100%;
-  margin-top: 8px;
+  margin-top: 12px;
+  width: 200px;
   background-color: var(--buttons-bg);
   border: 1px solid var(--border);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 10;
+  z-index: 20;
   overflow: hidden;
 }
 
@@ -30,4 +31,11 @@
 
 .menuList li:hover {
   opacity: 0.7;
+}
+
+.companiesButton {
+  display: flex;
+  color: var(--text);
+  text-decoration: none;
+  gap: 12px;
 }

@@ -1,12 +1,20 @@
+import { useState } from "react";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
-import { FaBars, FaUser } from "react-icons/fa6";
+import ProfileMenu from "../ProfileMenu/ProfileMenu";
+import { FaUser } from "react-icons/fa6";
 import styles from "./Header.module.css";
 
-interface HeaderProps {
-  onMenuClick?: () => void;
-}
-
 function Header() {
+  const [isProfileMenuOpen, setProfileMenuOpen] = useState(false);
+
+  const handleProfileMenuToggle = () => {
+    setProfileMenuOpen((currentValue) => !currentValue);
+  };
+
+  const handleLogout = () => {
+    setProfileMenuOpen(false);
+  };
+
   return (
     <header className={styles.header}>
       <nav className={styles.navContainer}>
@@ -22,9 +30,13 @@ function Header() {
 
         <div className={styles.headerRight}>
           <ThemeToggle />
-          <button className={styles.user}>
-            <FaUser className={styles.faUser} />
-          </button>
+          <div className={styles.profileContainer}>
+            <button className={styles.user} onClick={handleProfileMenuToggle}>
+              <FaUser className={styles.faUser} />
+            </button>
+
+            {isProfileMenuOpen && <ProfileMenu onLogout={handleLogout} />}
+          </div>
         </div>
       </nav>
     </header>

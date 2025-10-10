@@ -80,10 +80,6 @@
   margin-top: 20px;
 }
 
-.editModal {
-  /* margin: 100px; */
-}
-
 .deleteModalButtons {
   display: flex;
   justify-content: flex-end;
