@@ -7,18 +7,24 @@ interface ModalProps {
   isOpen: boolean; //se o modal ta aberto ou nao
   onClose: () => void; //funcao pra fechar o modal
   children: React.ReactNode; //conteudo do modal
+  contentClassName?: string; //prop opcional pra receber estilo
 }
 
-function Modal({ isOpen, onClose, children }: ModalProps) {
+function Modal({ isOpen, onClose, children, contentClassName }: ModalProps) {
   if (!isOpen) {
     return null;
   }
+
+  //combina a classe padrão com a customizada (se ela existir)
+  const modalContentClasses = `${styles.modalContent} ${
+    contentClassName || ""
+  }`;
 
   //createPortal pra "teleportar" o jsx pro fim do body
   return ReactDOM.createPortal(
     <div className={styles.modalBackdrop} onClick={onClose}>
       <div
-        className={styles.modalContent}
+        className={modalContentClasses}
         // impedir que cliques dentro do modal fechem ele
         onClick={(e) => e.stopPropagation()}
       >

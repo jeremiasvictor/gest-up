@@ -1,0 +1,176 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bgIcons {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.bgArrow {
+  position: absolute;
+  height: auto;
+  opacity: 0.06;
+  filter: blur(10px);
+}
+
+.bgArrow:first-of-type {
+  width: 55vw;
+  left: -10vw;
+  bottom: -78vw;
+  transform: rotate(340deg);
+}
+
+.bgArrow:nth-of-type(2) {
+  width: 60vw;
+  right: -15vw;
+  bottom: -70vw;
+  transform: rotate(385deg) scaleX(-1);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  color: #fff8f0;
+  font-size: 18px;
+  text-align: center;
+  padding-bottom: 20px;
+  cursor: default;
+}
+
+.logo {
+  width: 35px;
+  margin-bottom: 10px;
+}
+
+.card {
+  display: flex;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid #48456c;
+  background-image: linear-gradient(
+    to top,
+    rgba(155, 137, 235, 0.05),
+    rgba(255, 255, 255, 0)
+  );
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
+  max-width: 300px;
+  min-height: 70px;
+  justify-content: center;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.newCard {
+  border-style: dashed;
+  cursor: pointer;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  color: var(--secondary-color);
+  background: transparent;
+}
+
+.gridContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+  align-items: center;
+}
+
+.card span {
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.companiesModalContent h2 {
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.formGroup label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.formGroup input {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background-color: var(--background);
+  color: var(--text);
+  font-size: 16px;
+}
+
+.errorMessage {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: -8px;
+  margin-bottom: 16px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.cancelButton {
+  color: var(--text);
+  background: var(--buttons-bg-secondary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.cancelButton:hover {
+  background: var(--buttons-secondary-hover);
+}
+
+.createButton {
+  color: var(--text);
+  background: var(--buttons-bg);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.createButton:hover {
+  background: var(--buttons-hover);
+}

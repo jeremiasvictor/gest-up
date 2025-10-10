@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from "./Stock.module.css";
 import actionBarStyles from "../../components/ActionBar/ActionBar.module.css";
 import ActionBar from "../../components/ActionBar/ActionBar";
@@ -28,6 +28,7 @@ const mockProducts = [
 ];
 
 function Stock() {
+  const { companieId } = useParams();
   //tirar o mockProducts quando conectar com o back
   const [allProducts, setAllProducts] = useState<any[]>(mockProducts);
   const [searchTerm, setSearchTerm] = useState("");
@@ -37,15 +38,20 @@ function Stock() {
 
   //descomentar quando conectar
   // useEffect(() => {
-  //   api
-  //     .get("/produtos") //verificar se a rota é essa
-  //     .then((response) => {
-  //       setAllProducts(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Erro ao buscar produtos!", error);
-  //     });
-  // }, []);
+  //   if (companieId) {
+  //     setIsLoading(true);
+  //     api.get(`/companies/${companieId}/products`)
+  //       .then(response => {
+  //         setAllProducts(response.data);
+  //       })
+  //       .catch(error => {
+  //         console.error("Erro ao buscar produtos!", error);
+  //       })
+  //       .finally(() => {
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // }, [companieId]);
 
   //useMemo é pra filtragem só acontecer quando a lista ou o termo da busca mudarem
   const filteredProducts = useMemo(() => {
@@ -57,8 +63,6 @@ function Stock() {
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [allProducts, searchTerm]);
-
-  console.log("DADOS ENVIADOS PARA A TABELA:", filteredProducts);
 
   const handleOpenNewProductModal = () => {
     setNewProductModalOpen(false);
@@ -73,7 +77,7 @@ function Stock() {
       <div className={styles.stockContainer}>
         <MainContentCard>
           <ActionBar
-            title="My Products"
+            title={`Products of ${companieId}`}
             primaryAction={
               <button
                 className={actionBarStyles.addButton}
