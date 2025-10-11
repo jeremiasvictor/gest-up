@@ -11,15 +11,6 @@
   background-color: rgba(12, 12, 13, 0.4);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .modalContent {
   background-color: var(--background);
   color: var(--text);

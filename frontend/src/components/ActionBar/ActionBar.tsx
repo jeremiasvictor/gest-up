@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "./ActionBar.module.css";
+
 import { FaSearch } from "react-icons/fa";
 
 interface ActionBarProps {
   title: string;
   primaryAction?: React.ReactNode;
   secondaryActions?: React.ReactNode;
-  searchValue: string;
-  onSearchChange: (value: string) => void;
+  searchValue: string; //value of search bar
+  onSearchChange: (value: string) => void; //function to alert a change in search bar
 }
 
 function ActionBar({

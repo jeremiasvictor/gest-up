@@ -1,4 +1,5 @@
 import styles from "./ActionsMenu.module.css";
+
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 interface ActionsMenuProps {
@@ -12,11 +13,11 @@ function ActionsMenu({ onEdit, onDelete }: ActionsMenuProps) {
       <ul className={styles.menuList}>
         <li onClick={onEdit}>
           <FaEdit />
-          <span>Editar</span>
+          <span>Edit</span>
         </li>
         <li onClick={onDelete}>
           <FaTrash />
-          <span>Apagar</span>
+          <span>Delete</span>
         </li>
       </ul>
     </div>

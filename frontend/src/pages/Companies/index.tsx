@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { InputMask } from "@react-input/mask";
-import api from "../../services/api";
 import styles from "./Companies.module.css";
-import { FaPlus } from "react-icons/fa";
+
+// import api from "../../services/api";
 import Modal from "../../components/Modal/Modal";
 
+import { FaPlus } from "react-icons/fa";
+
 const mockCompanies = [
-  { id: 1, name: "Minha Cafeteria", productCount: 125 },
-  { id: 2, name: "Loja de Roupas Online", productCount: 48 },
+  { id: 1, name: "My coffe shop" },
+  { id: 2, name: "Mu clothes shops" },
 ];
 
 function Companies() {
@@ -23,10 +25,10 @@ function Companies() {
   const [isCreating, setIsCreating] = useState(false);
   const [createError, setCreateError] = useState("");
 
-  //funcao pros dados mockados
+  //function to mock data
   const handleCreateCompany = () => {
     if (!newCompanyData.name.trim()) {
-      setCreateError("O nome da empresa não pode ser vazio.");
+      setCreateError("Company name must not be empty");
       return;
     }
     setIsCreating(true);
@@ -47,10 +49,10 @@ function Companies() {
     }, 500);
   };
 
-  //descomente para usar a API
+  //when connect api
   //   async function handleCreateCompany() {
   //     if (!newCompanyData.name) {
-  //       setCreateError('O nome da empresa não pode ser vazio');
+  //       setCreateError('Company name cannot be empty');
   //       return;
   //     }
   //     setIsCreating(true);
@@ -62,20 +64,20 @@ function Companies() {
 
   //       handleCloseModal();
   //     } catch (err) {
-  //       console.error("Erro ao criar empresa", err);
-  //       setCreateError('Não foi possível criar a empresa. Tente novamente.');
+  //       console.error("Error when creating company", err);
+  //       setCreateError('Unable to create company. Please try again.');
   //     } finally {
   //       setIsCreating(false);
   //     }
   //   }
 
-  //descomente para usar a API
+  //when connect api
   /*
   useEffect(() => {
     setIsLoading(true);
     api.get('/companies')
       .then(response => setCompanies(response.data))
-      .catch(err => console.error("Erro ao buscar empresas", err))
+      .catch(err => console.error("Error when searching for companies", err))
       .finally(() => setIsLoading(false));
   }, []);
   */
@@ -139,7 +141,7 @@ function Companies() {
             type="button"
           >
             <FaPlus />
-            <span>Criar Nova Empresa</span>
+            <span>Create new company</span>
           </button>
         </main>
       )}
@@ -159,7 +161,7 @@ function Companies() {
               name="name"
               value={newCompanyData.name}
               onChange={handleFormChange}
-              placeholder="Ex: Cafeteria do Bairro"
+              placeholder="Ex: Neighborhood coffee shop"
             />
           </div>
 
@@ -185,7 +187,7 @@ function Companies() {
               name="address"
               value={newCompanyData.address}
               onChange={handleFormChange}
-              placeholder="Ex: Rua das Flores, 123"
+              placeholder="Ex: Flower Street, 123"
             />
           </div>
 

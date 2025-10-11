@@ -12,11 +12,12 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-
       <Route path="/companies" element={<Companies />} />
+      <Route path="/stock" element={<Stock />} />
+
       <Route path="/companie/:companieId" element={<Layout />}>
         <Route path="stock" element={<Stock />} />
-        <Route index element={<Navigate to="stock" replace />} />
+        <Route index element={<Navigate to="/stock" replace />} />
       </Route>
 
       <Route path="/" element={<Navigate to="/companies" replace />} />

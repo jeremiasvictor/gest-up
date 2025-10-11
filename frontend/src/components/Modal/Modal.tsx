@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styles from "./Modal.module.css";
+
 import { FaTimes } from "react-icons/fa";
 
 interface ModalProps {
-  isOpen: boolean; //se o modal ta aberto ou nao
-  onClose: () => void; //funcao pra fechar o modal
-  children: React.ReactNode; //conteudo do modal
-  contentClassName?: string; //prop opcional pra receber estilo
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  contentClassName?: string; //option prop to receive style
 }
 
 function Modal({ isOpen, onClose, children, contentClassName }: ModalProps) {
@@ -15,17 +16,17 @@ function Modal({ isOpen, onClose, children, contentClassName }: ModalProps) {
     return null;
   }
 
-  //combina a classe padrão com a customizada (se ela existir)
+  //combines default class with received one (if exists)
   const modalContentClasses = `${styles.modalContent} ${
     contentClassName || ""
   }`;
 
-  //createPortal pra "teleportar" o jsx pro fim do body
+  //createPortal to "teleport" jsx to end of body
   return ReactDOM.createPortal(
     <div className={styles.modalBackdrop} onClick={onClose}>
       <div
         className={modalContentClasses}
-        // impedir que cliques dentro do modal fechem ele
+        //prevent clicks inside modal close it
         onClick={(e) => e.stopPropagation()}
       >
         <button className={styles.closeButton} onClick={onClose}>
@@ -34,7 +35,7 @@ function Modal({ isOpen, onClose, children, contentClassName }: ModalProps) {
         {children}
       </div>
     </div>,
-    // o destino do "teletransporte": o div #modal-root no index.html
+    //destination of "teleport": the #modal-root div in index.html
     document.getElementById("modal-root")!
   );
 }

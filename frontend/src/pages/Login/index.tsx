@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-
 import styles from "./Login.module.css";
+
 import api from "../../services/api";
+
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(true);
@@ -34,9 +35,9 @@ function Login() {
         email: email,
         senha: password,
       });
-      console.log("Login sucesso", response.data);
+      console.log("Login success", response.data);
     } catch (err: any) {
-      setError("Usuário ou senha inválidos.");
+      setError("Invalid username or password");
     } finally {
       setLoading(false);
     }

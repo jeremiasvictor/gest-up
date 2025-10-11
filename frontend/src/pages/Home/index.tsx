@@ -12,7 +12,7 @@ function Home() {
       setUsers(response.data);
       console.log(response.data);
     } catch (error) {
-      console.error("Erro ao buscar usuários:", error);
+      console.error("Error searching for users:", error);
     }
   }
 
@@ -22,7 +22,7 @@ function Home() {
 
   return (
     <div>
-      <h1 className={styles.title}>Página Principal (Home)</h1>
+      <h1 className={styles.title}>Home Page</h1>
     </div>
   );
 }

@@ -16,16 +16,13 @@
 
 .productTable th:nth-child(1) {
   width: 30%;
-} /* coluna name */
-.productTable th:nth-child(2) {
-  width: 20%;
-} /* coluna ID */
+} /* name */
 .productTable th:nth-child(3) {
   width: 15%;
-} /* coluna value */
+} /* value */
 .productTable th:nth-child(4) {
   width: 20%;
-} /* coluna quantity */
+} /* quantity */
 
 .productTable th {
   padding: 16px 24px;
@@ -71,7 +68,7 @@
 
 .actionsCell {
   width: 1%;
-  white-space: nowrap; /* impede a quebra de linha */
+  white-space: nowrap;
   text-align: right;
   position: relative;
 }
@@ -169,12 +166,10 @@
   background: var(--buttons-hover);
 }
 
-/* impares */
 .productTable tbody tr:nth-child(odd) {
   background-color: var(--table-child-odd);
 }
 
-/* pares */
 .productTable tbody tr:nth-child(even) {
   background-color: var(--table-child-even);
 }

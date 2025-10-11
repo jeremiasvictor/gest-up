@@ -1,13 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Sidebar.module.css";
 
-import {
-  FaLayerGroup,
-  FaBoxOpen,
-  FaCheckToSlot,
-  FaFaceSmile,
-  FaGear,
-} from "react-icons/fa6";
+import { FaBoxOpen, FaGear } from "react-icons/fa6";
 
 function Sidebar() {
   return (
