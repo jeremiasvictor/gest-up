@@ -24,15 +24,15 @@ function ProductTable({ products }: ProductTableProps) {
   const [openMenuId, setOpenMenuId] = useState<number | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
 
-  // buscar dados reais do back
+  //when api connected
   /*
   useEffect(() => {
-    api.get('/produtos')
+    api.get('/products')
       .then(response => {
         setProducts(response.data);
       })
       .catch(error => {
-        console.error("Erro ao buscar produtos!", error);
+        console.error("Error searching for products!", error);
       });
   }, []);
   */
@@ -60,7 +60,7 @@ function ProductTable({ products }: ProductTableProps) {
   };
 
   const handleDelete = () => {
-    //lógica para chamar a API e deletar
+    //logic to call API and delete
     setDeleteModalOpen(false);
   };
 
@@ -71,7 +71,7 @@ function ProductTable({ products }: ProductTableProps) {
   };
 
   const handleUpdateProduct = (updatedProduct: any) => {
-    // Aqui viria a chamada para a API (ex: api.put(`/produtos/${updatedProduct.id}`, updatedProduct))
+    //logic to call API and update
     setEditModalOpen(false);
   };
 
@@ -79,7 +79,7 @@ function ProductTable({ products }: ProductTableProps) {
     return (
       <div className={styles.emptyStateContainer}>
         <FaSearchMinus className={styles.emptyStateIcon} />
-        <h2>Nenhum produto encontrado</h2>
+        <h2>No products found</h2>
       </div>
     );
   }
@@ -138,9 +138,9 @@ function ProductTable({ products }: ProductTableProps) {
         onClose={() => setDeleteModalOpen(false)}
       >
         <div className={styles.deleteModal}>
-          <h2>Confirmar Exclusão</h2>
+          <h2>Confirm deletion</h2>
           <p>
-            Você tem certeza que deseja excluir
+            Are you sure you want to delete
             <strong> {selectedProduct?.name}</strong>?
           </p>
           <div className={styles.deleteModalButtons}>
@@ -148,10 +148,10 @@ function ProductTable({ products }: ProductTableProps) {
               onClick={() => setDeleteModalOpen(false)}
               className={styles.cancelButton}
             >
-              Cancelar
+              Cancel
             </button>
             <button onClick={handleDelete} className={styles.deleteButton}>
-              Excluir
+              Delete
             </button>
           </div>
         </div>
@@ -159,7 +159,7 @@ function ProductTable({ products }: ProductTableProps) {
 
       <Modal isOpen={isEditModalOpen} onClose={() => setEditModalOpen(false)}>
         <div className={styles.editModal}>
-          <h2>Editar Produto</h2>
+          <h2>Edit product</h2>
           {selectedProduct && (
             <EditProductForm
               productToEdit={selectedProduct}

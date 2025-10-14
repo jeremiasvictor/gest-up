@@ -5,15 +5,14 @@ import { useTheme } from "../../contexts/ThemeContext";
 
 import { FaMoon, FaSun } from "react-icons/fa6";
 
-// React.FC é a tipagem do typescript que indica que é um Funcional Component
+// React.FC is TypeScript typing that indicates a Functional Component
 const ThemeToggle: React.FC = () => {
-  //desestruturação: o hook um objeto com duas propriedades, e coloca cada uma numa constante
   const { theme, toggleTheme } = useTheme();
 
-  // true se for 'light' e false se for 'dark'
+  // true if its 'light' and false if its 'dark'
   const isChecked = theme === "light";
 
-  // combinar as classes dinamicamente
+  // combine classes dynamically
   const sliderClasses = `${styles.slider} ${
     theme === "light" ? styles.light : ""
   }`;

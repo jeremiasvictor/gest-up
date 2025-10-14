@@ -21,12 +21,12 @@ function Modal({ isOpen, onClose, children, contentClassName }: ModalProps) {
     contentClassName || ""
   }`;
 
-  //createPortal pra "teleportar" o jsx pro fim do body
+  //createPortal to "teleport" jsx to end of body
   return ReactDOM.createPortal(
     <div className={styles.modalBackdrop} onClick={onClose}>
       <div
-        className={styles.modalContent}
-        // impedir que cliques dentro do modal fechem ele
+        className={modalContentClasses}
+        //prevent clicks inside modal close it
         onClick={(e) => e.stopPropagation()}
       >
         <button className={styles.closeButton} onClick={onClose}>
@@ -35,7 +35,7 @@ function Modal({ isOpen, onClose, children, contentClassName }: ModalProps) {
         {children}
       </div>
     </div>,
-    // o destino do "teletransporte": o div #modal-root no index.html
+    //destination of "teleport": the #modal-root div in index.html
     document.getElementById("modal-root")!
   );
 }

@@ -32,7 +32,7 @@ function Register() {
     const terms = inputTerms.current?.checked || false;
 
     if (!terms) {
-      setError("Você precisa aceitar os termos.");
+      setError("You need to accept the terms.");
       setLoading(false);
       return;
     }
@@ -44,9 +44,9 @@ function Register() {
         senha: password,
       });
 
-      console.log("Registro sucesso", response.data);
+      console.log("Successful registration", response.data);
     } catch (err: any) {
-      setError("Erro ao registrar. Tente novamente.");
+      setError("Error registering. Please try again.");
     } finally {
       setLoading(false);
     }

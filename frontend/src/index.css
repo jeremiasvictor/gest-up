@@ -18,13 +18,14 @@ body,
   height: 100%;
 }
 
+/* colors variables */
 :root {
   --background: #0c0c0d;
   --text: #c8c5c1;
   --border: #48456c;
   --modal-bg-color: rgba(0, 0, 0, 0.7);
 
-  /* botoes */
+  /* buttons */
   --buttons-bg: #2c264a;
   --buttons-bg-secondary: #1e1e1f;
   --secondary-color: #a79bde;
@@ -37,7 +38,7 @@ body,
   --scrollbar-thumb: #48456c;
   --scrollbar-thumb-hover: #a79bde;
 
-  /* tabela */
+  /* table */
   --table-child-odd: #131215;
   --table-child-even: #1c1b23;
   --table-child-hover: #2c264a;
@@ -60,7 +61,7 @@ html.light {
   --border: #48456c;
   --modal-bg-color: rgba(139, 139, 139, 0.7);
 
-  /* botoes */
+  /* buttons */
   --buttons-bg: #a79bde;
   --buttons-bg-secondary: #858589;
   --secondary-color: #2c264a;
@@ -73,7 +74,7 @@ html.light {
   --scrollbar-thumb: #a79bde;
   --scrollbar-thumb-hover: #2c264a;
 
-  /* tabela */
+  /* table */
   --table-child-odd: #7e7e7e;
   --table-child-even: #9b9a9a;
   --table-child-hover: #a79bde;
@@ -98,14 +99,14 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/*remove as setas dos inputs numéricos no Chrome, Safari, Edge, Opera */
+/* removes arrows from numeric inputs in Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/*remove as setas dos inputs numéricos no Firefox */
+/* removes arrows from numeric inputs in Firefox */
 input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;

@@ -35,9 +35,9 @@ function Login() {
         email: email,
         senha: password,
       });
-      console.log("Login sucesso", response.data);
+      console.log("Login success", response.data);
     } catch (err: any) {
-      setError("Usuário ou senha inválidos.");
+      setError("Invalid username or password");
     } finally {
       setLoading(false);
     }

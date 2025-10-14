@@ -21,6 +21,7 @@ function EditProductForm({
 }: EditProductFormProps) {
   const [formData, setFormData] = useState(productToEdit);
 
+  //function to update the changes on form inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -30,14 +31,14 @@ function EditProductForm({
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); //impede o recarregamento da página
+    e.preventDefault(); //prevents page reload
     onSave(formData);
   };
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.formGroup}>
-        <label htmlFor="name">Nome do Produto</label>
+        <label htmlFor="name">Product name</label>
         <input
           type="text"
           id="name"
@@ -48,7 +49,7 @@ function EditProductForm({
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="value">Valor (R$)</label>
+        <label htmlFor="value">Value</label>
         <input
           type="number"
           id="value"
@@ -59,7 +60,7 @@ function EditProductForm({
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="quantity">Quantidade</label>
+        <label htmlFor="quantity">Quantity</label>
         <input
           type="number"
           id="quantity"
@@ -75,10 +76,10 @@ function EditProductForm({
           onClick={onCancel}
           className={styles.cancelButton}
         >
-          Cancelar
+          Cancel
         </button>
         <button type="submit" className={styles.saveButton}>
-          Salvar
+          Save
         </button>
       </div>
     </form>

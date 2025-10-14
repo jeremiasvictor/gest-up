@@ -15,17 +15,14 @@
 }
 
 .productTable th:nth-child(1) {
-  width: 30%;
-} /* coluna name */
+  width: 50%;
+} /* name */
 .productTable th:nth-child(2) {
-  width: 20%;
-} /* coluna ID */
-.productTable th:nth-child(3) {
   width: 15%;
-} /* coluna value */
-.productTable th:nth-child(4) {
+} /* value */
+.productTable th:nth-child(3) {
   width: 20%;
-} /* coluna quantity */
+} /* quantity */
 
 .productTable th {
   padding: 16px 24px;
