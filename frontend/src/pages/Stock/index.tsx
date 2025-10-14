@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useState, useEffect, useMemo } from "react";
 import styles from "./Stock.module.css";
+
+// import api from "../../services/api";
 import actionBarStyles from "../../components/ActionBar/ActionBar.module.css";
 import ActionBar from "../../components/ActionBar/ActionBar";
 import ProductTable from "../../components/ProductTable/ProductTable";
 import MainContentCard from "../../components/MainContentCard/MainContentCard";
 import Modal from "../../components/Modal/Modal";
-import api from "../../services/api";
 
-import { FaPlus, FaSort, FaFilter } from "react-icons/fa";
-import { useState, useEffect, useMemo } from "react";
+import { FaPlus, FaFilter } from "react-icons/fa";
 
 const mockProducts = [
   { id: 1, name: "Bolo de Pote de Morango", value: 12.5, quantity: 10 },
@@ -28,7 +29,9 @@ const mockProducts = [
 ];
 
 function Stock() {
-  //tirar o mockProducts quando conectar com o back
+  //useParams is a hook that extract dynamic parameters from the URL
+  const { companieId } = useParams();
+  //remove mockProducts when connect api
   const [allProducts, setAllProducts] = useState<any[]>(mockProducts);
   const [searchTerm, setSearchTerm] = useState("");
   const [isNewProductModalOpen, setNewProductModalOpen] = useState(false);
@@ -37,15 +40,20 @@ function Stock() {
 
   //descomentar quando conectar
   // useEffect(() => {
-  //   api
-  //     .get("/produtos") //verificar se a rota é essa
-  //     .then((response) => {
-  //       setAllProducts(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Erro ao buscar produtos!", error);
-  //     });
-  // }, []);
+  //   if (companieId) {
+  //     setIsLoading(true);
+  //     api.get(`/companies/${companieId}/products`)
+  //       .then(response => {
+  //         setAllProducts(response.data);
+  //       })
+  //       .catch(error => {
+  //         console.error("Error searching for products", error);
+  //       })
+  //       .finally(() => {
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // }, [companieId]);
 
   //useMemo é pra filtragem só acontecer quando a lista ou o termo da busca mudarem
   const filteredProducts = useMemo(() => {
@@ -57,8 +65,6 @@ function Stock() {
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [allProducts, searchTerm]);
-
-  console.log("DADOS ENVIADOS PARA A TABELA:", filteredProducts);
 
   const handleOpenNewProductModal = () => {
     setNewProductModalOpen(false);
@@ -73,7 +79,7 @@ function Stock() {
       <div className={styles.stockContainer}>
         <MainContentCard>
           <ActionBar
-            title="My Products"
+            title={`Products of ${companieId}`}
             primaryAction={
               <button
                 className={actionBarStyles.addButton}
@@ -85,10 +91,6 @@ function Stock() {
             }
             secondaryActions={
               <>
-                {/* <button className={actionBarStyles.secondaryButton}>
-                <FaSort />
-                <span>Sort</span>
-              </button> */}
                 <button className={actionBarStyles.secondaryButton}>
                   <FaFilter />
                   <span>Filter</span>

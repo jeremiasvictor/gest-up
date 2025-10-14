@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-
 import styles from "./Login.module.css";
+
 import api from "../../services/api";
+
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(true);
@@ -45,24 +46,12 @@ function Login() {
   return (
     <div className={styles.container}>
       <div className={styles.bgIcons}>
-        <img
-          src="../../../public/flecha.png"
-          alt=""
-          className={styles.bgArrow}
-        />
-        <img
-          src="../../../public/flecha.png"
-          alt=""
-          className={styles.bgArrow}
-        />
+        <img src="/flecha.png" alt="" className={styles.bgArrow} />
+        <img src="/flecha.png" alt="" className={styles.bgArrow} />
       </div>
 
       <a href="/">
-        <img
-          className={styles.logo}
-          src="../../../public/icon.png"
-          alt="Logo Image"
-        />
+        <img className={styles.logo} src="/icon.png" alt="Logo Image" />
       </a>
       <h1 className={styles.title}>Welcome back!</h1>
       <form className={styles.loginForm}>

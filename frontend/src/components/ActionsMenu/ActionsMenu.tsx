@@ -1,4 +1,5 @@
 import styles from "./ActionsMenu.module.css";
+
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 interface ActionsMenuProps {

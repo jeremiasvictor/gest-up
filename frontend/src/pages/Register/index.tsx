@@ -1,14 +1,13 @@
 import { useRef, useState, useEffect } from "react";
+import styles from "./Register.module.css";
 
 import api from "../../services/api";
-import styles from "./Register.module.css";
 
 function Register() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const inputFirstName = useRef<HTMLInputElement>(null);
   const inputLastName = useRef<HTMLInputElement>(null);
-  const inputCPF = useRef<HTMLInputElement>(null);
   const inputEmail = useRef<HTMLInputElement>(null);
   const inputPassword = useRef<HTMLInputElement>(null);
   const inputTerms = useRef<HTMLInputElement>(null);
@@ -28,7 +27,6 @@ function Register() {
     const firstName = inputFirstName.current?.value || "";
     const lastName = inputLastName.current?.value || "";
     const completeName = firstName + " " + lastName || "";
-    const cpf = inputCPF.current?.value || "";
     const email = inputEmail.current?.value || "";
     const password = inputPassword.current?.value || "";
     const terms = inputTerms.current?.checked || false;
@@ -57,24 +55,12 @@ function Register() {
   return (
     <div className={styles.container}>
       <div className={styles.bgIcons}>
-        <img
-          src="../../../public/flecha.png"
-          alt=""
-          className={styles.bgArrow}
-        />
-        <img
-          src="../../../public/flecha.png"
-          alt=""
-          className={styles.bgArrow}
-        />
+        <img src="/flecha.png" alt="" className={styles.bgArrow} />
+        <img src="/flecha.png" alt="" className={styles.bgArrow} />
       </div>
 
       <a href="/">
-        <img
-          className={styles.logo}
-          src="../../../public/icon.png"
-          alt="Logo Image"
-        />
+        <img className={styles.logo} src="/icon.png" alt="Logo Image" />
       </a>
       <h1 className={styles.title}>Get start with us</h1>
       <form className={styles.registerForm}>
@@ -91,12 +77,6 @@ function Register() {
             <div className={`${styles.nameInput} ${styles.input}`}>
               <input type="text" name="last-name" ref={inputLastName} />
             </div>
-          </div>
-        </div>
-        <div className={styles.companyName}>
-          <label htmlFor="company">CPF</label>
-          <div className={styles.input}>
-            <input type="text" name="company-name" ref={inputCPF} />
           </div>
         </div>
         <div className={styles.emailAdress}>

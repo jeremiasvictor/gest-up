@@ -1,7 +1,9 @@
 import React from "react";
-import { useTheme } from "../../contexts/ThemeContext";
-import { FaMoon, FaSun } from "react-icons/fa6";
 import styles from "./ThemeToggle.module.css";
+
+import { useTheme } from "../../contexts/ThemeContext";
+
+import { FaMoon, FaSun } from "react-icons/fa6";
 
 // React.FC é a tipagem do typescript que indica que é um Funcional Component
 const ThemeToggle: React.FC = () => {
@@ -21,7 +23,6 @@ const ThemeToggle: React.FC = () => {
 
   return (
     <div className={styles.themeSwitchWrapper}>
-      {/* label é pra acessibilidade */}
       <label className={styles.themeSwitch} htmlFor="theme-checkbox">
         <input
           type="checkbox"

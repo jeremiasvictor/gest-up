@@ -1,18 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styles from "./Modal.module.css";
+
 import { FaTimes } from "react-icons/fa";
 
 interface ModalProps {
-  isOpen: boolean; //se o modal ta aberto ou nao
-  onClose: () => void; //funcao pra fechar o modal
-  children: React.ReactNode; //conteudo do modal
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  contentClassName?: string; //option prop to receive style
 }
 
-function Modal({ isOpen, onClose, children }: ModalProps) {
+function Modal({ isOpen, onClose, children, contentClassName }: ModalProps) {
   if (!isOpen) {
     return null;
   }
+
+  //combines default class with received one (if exists)
+  const modalContentClasses = `${styles.modalContent} ${
+    contentClassName || ""
+  }`;
 
   //createPortal pra "teleportar" o jsx pro fim do body
   return ReactDOM.createPortal(

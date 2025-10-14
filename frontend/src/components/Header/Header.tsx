@@ -1,8 +1,10 @@
 import { useState } from "react";
+import styles from "./Header.module.css";
+
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import ProfileMenu from "../ProfileMenu/ProfileMenu";
+
 import { FaUser } from "react-icons/fa6";
-import styles from "./Header.module.css";
 
 function Header() {
   const [isProfileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -19,12 +21,8 @@ function Header() {
     <header className={styles.header}>
       <nav className={styles.navContainer}>
         <div className={styles.headerLeft}>
-          {/* <button className={styles.menu}>
-            <FaBars className={styles.FaBars} />
-          </button> */}
-
           <a href="/" className={styles.gestupLogo}>
-            <img src="../../../public/com-sombra.png" alt="Logo Image" />
+            <img src="/com-sombra.png" alt="Logo Image" />
           </a>
         </div>
 
@@ -35,6 +33,7 @@ function Header() {
               <FaUser className={styles.faUser} />
             </button>
 
+            {/* render profileMenu if isProfileMenuOpen = true */}
             {isProfileMenuOpen && <ProfileMenu onLogout={handleLogout} />}
           </div>
         </div>

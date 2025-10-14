@@ -1,5 +1,5 @@
 .title {
-  color: aliceblue;
+  color: var(--text);
   padding: 40px;
   font-size: 20px;
   text-align: center;

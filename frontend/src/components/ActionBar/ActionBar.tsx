@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ActionBar.module.css";
+
 import { FaSearch } from "react-icons/fa";
 
 interface ActionBarProps {
