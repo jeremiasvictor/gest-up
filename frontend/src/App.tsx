@@ -5,21 +5,21 @@ import Layout from "./components/Layout/Layout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Stock from "./pages/Stock";
-import Companies from "./pages/Companies";
+import Business from "./pages/Business";
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/companies" element={<Companies />} />
+      <Route path="/business" element={<Business />} />
 
-      <Route path="/companies/:companieId" element={<Layout />}>
+      <Route path="/business/:businessId" element={<Layout />}>
         <Route path="stock" element={<Stock />} />
         <Route index element={<Navigate to="stock" replace />} />
       </Route>
 
-      <Route path="/" element={<Navigate to="/companies" replace />} />
+      <Route path="/" element={<Navigate to="/business" replace />} />
     </Routes>
   );
 }

@@ -33,7 +33,7 @@
   opacity: 0.7;
 }
 
-.companiesButton {
+.businessButton {
   display: flex;
   color: var(--text);
   text-decoration: none;

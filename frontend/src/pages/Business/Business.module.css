@@ -109,7 +109,7 @@
   display: flex;
 }
 
-.companiesModalContent h2 {
+.businessModalContent h2 {
   margin-bottom: 24px;
   color: var(--text);
 }

@@ -12,9 +12,9 @@ function ProfileMenu({ onLogout }: ProfileMenuProps) {
     <div className={styles.menuContainer}>
       <ul className={styles.menuList}>
         <li>
-          <Link to="/companies" className={styles.companiesButton}>
+          <Link to="/business" className={styles.businessButton}>
             <FaUserCircle />
-            <span>My companies</span>
+            <span>My business</span>
           </Link>
         </li>
         <li onClick={onLogout} className={styles.logoutButton}>

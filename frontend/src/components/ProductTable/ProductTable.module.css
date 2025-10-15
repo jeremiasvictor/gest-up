@@ -73,17 +73,6 @@
   position: relative;
 }
 
-.deleteModal p {
-  margin-top: 20px;
-}
-
-.deleteModalButtons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 24px;
-}
-
 .actionsButton {
   background: none;
   border: none;
@@ -104,18 +93,6 @@
 
 .cancelButton:hover {
   background: var(--buttons-secondary-hover);
-}
-
-.deleteButton {
-  color: var(--text);
-  background: var(--buttons-bg);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-}
-
-.deleteButton:hover {
-  background: var(--buttons-hover);
 }
 
 .editProductModalInputs {

@@ -4,7 +4,7 @@ import styles from "./EditProductForm.module.css";
 interface Product {
   id: number;
   name: string;
-  value: number;
+  price: number;
   quantity: number | null;
 }
 
@@ -49,12 +49,12 @@ function EditProductForm({
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="value">Value</label>
+        <label htmlFor="price">Price</label>
         <input
           type="number"
-          id="value"
-          name="value"
-          value={formData.value}
+          id="prime"
+          name="price"
+          value={formData.price}
           onChange={handleChange}
         />
       </div>

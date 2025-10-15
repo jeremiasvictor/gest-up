@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 
 import api from "../../services/api";
@@ -6,6 +7,7 @@ import api from "../../services/api";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(true);
 
   const [loading, setLoading] = useState(false);
@@ -31,11 +33,15 @@ function Login() {
     const password = inputPassword.current?.value || "";
 
     try {
-      const response = await api.post("/user/login", {
-        email: email,
-        senha: password,
-      });
-      console.log("Login success", response.data);
+      const response = await api.post("/user/login", { email, password });
+      const userId = response.data.id;
+
+      if (userId) {
+        localStorage.setItem("gestup_userId", userId);
+        navigate("/business");
+      } else {
+        setError("An unexpected error ocurred while logging in");
+      }
     } catch (err: any) {
       setError("Invalid username or password");
     } finally {

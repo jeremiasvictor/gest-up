@@ -1,16 +1,28 @@
 import { useRef, useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import styles from "./Register.module.css";
 
 import api from "../../services/api";
 
 function Register() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    terms: false,
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const inputFirstName = useRef<HTMLInputElement>(null);
-  const inputLastName = useRef<HTMLInputElement>(null);
-  const inputEmail = useRef<HTMLInputElement>(null);
-  const inputPassword = useRef<HTMLInputElement>(null);
-  const inputTerms = useRef<HTMLInputElement>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
 
   useEffect(() => {
     const pageClassName = styles.RegisterPage;
@@ -24,29 +36,27 @@ function Register() {
   async function handleRegister() {
     setLoading(true);
     setError("");
-    const firstName = inputFirstName.current?.value || "";
-    const lastName = inputLastName.current?.value || "";
-    const completeName = firstName + " " + lastName || "";
-    const email = inputEmail.current?.value || "";
-    const password = inputPassword.current?.value || "";
-    const terms = inputTerms.current?.checked || false;
 
-    if (!terms) {
+    if (!formData.terms) {
       setError("You need to accept the terms.");
       setLoading(false);
       return;
     }
 
+    const name = `${formData.firstName} ${formData.lastName}`.trim();
+
     try {
-      const response = await api.post("/user", {
-        nome: completeName,
-        email: email,
-        senha: password,
+      await api.post("/user", {
+        name: name,
+        email: formData.email,
+        password: formData.password,
       });
 
-      console.log("Successful registration", response.data);
+      navigate("/login?registered=true");
     } catch (err: any) {
-      setError("Error registering. Please try again.");
+      const errorMessage = err.response?.data?.message;
+      // setError("Error registering. Please try again.");
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -68,35 +78,57 @@ function Register() {
           <div className={styles.first}>
             <label htmlFor="first">First name</label>
             <div className={`${styles.nameInput} ${styles.input}`}>
-              <input type="text" name="first-name" ref={inputFirstName} />
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
             </div>
           </div>
 
           <div className={styles.last}>
             <label htmlFor="last">Last name</label>
             <div className={`${styles.nameInput} ${styles.input}`}>
-              <input type="text" name="last-name" ref={inputLastName} />
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </div>
         <div className={styles.emailAdress}>
           <label htmlFor="email">Email adress</label>
           <div className={styles.input}>
-            <input type="text" name="email-adress" ref={inputEmail} />
+            <input
+              type="text"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
           </div>
         </div>
         <div className={styles.password}>
           <label htmlFor="password">Create a password</label>
           <div className={styles.input}>
-            <input type="text" name="password" ref={inputPassword} />
+            <input
+              type="text"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
           </div>
 
           <div className={styles.terms}>
             <input
               type="checkbox"
               id="terms"
+              name="terms"
               className={styles.termsSquare}
-              ref={inputTerms}
+              checked={formData.terms}
+              onChange={handleChange}
             />
             <p className={styles.termsText}>
               I agree to the <a href="">Terms and Privacy</a>
