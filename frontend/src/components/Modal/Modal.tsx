@@ -9,9 +9,16 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   contentClassName?: string; //option prop to receive style
+  closeOnBackdropClick?: boolean;
 }
 
-function Modal({ isOpen, onClose, children, contentClassName }: ModalProps) {
+function Modal({
+  isOpen,
+  onClose,
+  children,
+  contentClassName,
+  closeOnBackdropClick = true,
+}: ModalProps) {
   if (!isOpen) {
     return null;
   }
@@ -21,9 +28,15 @@ function Modal({ isOpen, onClose, children, contentClassName }: ModalProps) {
     contentClassName || ""
   }`;
 
+  const handleBackdropClick = () => {
+    if (closeOnBackdropClick) {
+      onClose();
+    }
+  };
+
   //createPortal to "teleport" jsx to end of body
   return ReactDOM.createPortal(
-    <div className={styles.modalBackdrop} onClick={onClose}>
+    <div className={styles.modalBackdrop} onClick={handleBackdropClick}>
       <div
         className={modalContentClasses}
         //prevent clicks inside modal close it

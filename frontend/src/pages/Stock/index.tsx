@@ -171,7 +171,11 @@ function Stock() {
         </MainContentCard>
       </div>
 
-      <Modal isOpen={isNewModalOpen} onClose={() => setNewModalOpen(false)}>
+      <Modal
+        isOpen={isNewModalOpen}
+        onClose={() => setNewModalOpen(false)}
+        closeOnBackdropClick={false}
+      >
         <h2>New product</h2>
 
         <div className={styles.newProductModalInputs}>
@@ -213,7 +217,11 @@ function Stock() {
         </div>
       </Modal>
 
-      <Modal isOpen={isEditModalOpen} onClose={() => setEditModalOpen(false)}>
+      <Modal
+        isOpen={isEditModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        closeOnBackdropClick={false}
+      >
         <h2>Edit Product</h2>
         {selectedProduct && (
           <EditProductForm

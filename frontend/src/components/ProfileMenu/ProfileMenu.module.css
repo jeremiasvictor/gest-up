@@ -12,6 +12,13 @@
   overflow: hidden;
 }
 
+.userInfo span {
+  display: flex;
+  align-items: center;
+  padding: 20px 0 10px 24px;
+  font-size: 18px;
+}
+
 .menuList {
   list-style: none;
   padding: 8px;

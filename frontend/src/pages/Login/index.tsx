@@ -8,7 +8,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -35,9 +35,11 @@ function Login() {
     try {
       const response = await api.post("/user/login", { email, password });
       const userId = response.data.id;
+      const userName = response.data.name;
 
-      if (userId) {
+      if (userId && userName) {
         localStorage.setItem("gestup_userId", userId);
+        localStorage.setItem("gestup_userName", userName);
         navigate("/business");
       } else {
         setError("An unexpected error ocurred while logging in");
