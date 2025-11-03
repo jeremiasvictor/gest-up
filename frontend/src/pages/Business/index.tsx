@@ -4,6 +4,7 @@ import { InputMask } from "@react-input/mask";
 import styles from "./Business.module.css";
 
 import api from "../../services/api";
+import Header from "../../components/Header/Header";
 import Modal from "../../components/Modal/Modal";
 
 import { FaPlus } from "react-icons/fa";
@@ -102,47 +103,51 @@ function Business() {
   };
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={styles.businessPageWrapper}>
       <div className={styles.bgIcons}>
         <img src="/flecha.png" alt="" className={styles.bgArrow} />
         <img src="/flecha.png" alt="" className={styles.bgArrow} />
       </div>
-      <header className={styles.header}>
-        <a href="/">
-          <img className={styles.logo} src="/icon.png" alt="Logo Image" />
-        </a>
-        <h1 className={styles.title}>Select or create a business</h1>
-      </header>
+      <Header />
+      <div className={styles.pageContainer}>
+        <div className={styles.header}>
+          <a href="/">
+            <img className={styles.logo} src="/icon.png" alt="Logo Image" />
+          </a>
+          <h1 className={styles.title}>Select or create a business</h1>
+        </div>
 
-      {isLoading ? (
-        <p>Loading business...</p>
-      ) : (
-        <main className={styles.gridContainer}>
-          {businesses.map((business) => (
-            <Link
-              key={business.id}
-              to={`/business/${business.id}/stock`}
-              className={styles.card}
+        {isLoading ? (
+          <p>Loading business...</p>
+        ) : (
+          <main className={styles.gridContainer}>
+            {businesses.map((business) => (
+              <Link
+                key={business.id}
+                to={`/business/${business.id}/stock`}
+                className={styles.card}
+              >
+                <span>{business.name}</span>
+              </Link>
+            ))}
+
+            <button
+              className={`${styles.card} ${styles.newCard}`}
+              onClick={() => setNewBusinessModalOpen(true)}
+              type="button"
             >
-              <span>{business.name}</span>
-            </Link>
-          ))}
-
-          <button
-            className={`${styles.card} ${styles.newCard}`}
-            onClick={() => setNewBusinessModalOpen(true)}
-            type="button"
-          >
-            <FaPlus />
-            <span>Create new business</span>
-          </button>
-        </main>
-      )}
+              <FaPlus />
+              <span>Create new business</span>
+            </button>
+          </main>
+        )}
+      </div>
 
       <Modal
         isOpen={isNewBusinessModalOpen}
         onClose={handleCloseModal}
         contentClassName={styles.businessModal}
+        closeOnBackdropClick={false}
       >
         <div className={styles.businessModalContent}>
           <h2>Create new business</h2>

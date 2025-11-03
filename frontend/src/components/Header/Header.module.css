@@ -45,3 +45,38 @@
 .profileContainer {
   position: relative;
 }
+
+.cancelButton {
+  color: var(--text);
+  background: var(--buttons-bg-secondary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.cancelButton:hover {
+  background: var(--buttons-secondary-hover);
+}
+
+.logoutModalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.logoutModalP {
+  margin-top: 20px;
+}
+
+.logoutButton {
+  color: var(--text);
+  background: var(--buttons-bg);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.logoutButton:hover {
+  background: var(--buttons-hover);
+}

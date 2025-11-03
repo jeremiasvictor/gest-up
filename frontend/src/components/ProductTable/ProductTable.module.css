@@ -187,3 +187,16 @@
   margin-bottom: 8px;
   font-weight: 600;
 }
+
+.menuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.menuWrapper {
+  z-index: 1001;
+}
