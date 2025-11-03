@@ -3,7 +3,9 @@ package com.deboxadinhos.GestUp.services;
 import com.deboxadinhos.GestUp.dto.CreateUserDTO;
 import com.deboxadinhos.GestUp.dto.ResponseUserDTO;
 import com.deboxadinhos.GestUp.exceptions.usuarioException.*;
+import com.deboxadinhos.GestUp.models.BaseUser;
 import com.deboxadinhos.GestUp.models.User;
+import com.deboxadinhos.GestUp.models.UserAdmin;
 import com.deboxadinhos.GestUp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ public class UserService implements IUserService {
     private UserRepository userRepository;
 
     @Override
-    public List<User> findAll() throws NotFoundUserException, InvalidPasswordException{ return userRepository.findAll(); }
+    public List<BaseUser> findAll() throws NotFoundUserException, InvalidPasswordException{ return userRepository.findAll(); }
 
     @Override
     public ResponseUserDTO doLogin(CreateUserDTO userRequested) {
@@ -26,12 +28,13 @@ public class UserService implements IUserService {
         authenticateEmail(userRequested.getEmail());
 
         //Cria um usuário nulo para atribuição posterior, cria um usuario com classe Optional (pois se o usuario nao existir, nao retornara NullPointerException)
-        User userInBank;
-        Optional<User> optionalUser = userRepository.findByEmail(userRequested.getEmail());
+        BaseUser userInBank;
+        Optional<BaseUser> optionalUser = userRepository.findByEmail(userRequested.getEmail());
 
-        //Se tem algo no optional (não é nulo e só pode ser user), tire e atribua no userInBank, se não, jogue a exceção.
+        //Se tem algo no optional, tire e atribua no userInBank, se não, jogue a exceção.
         if (optionalUser.isPresent()) { userInBank = optionalUser.get(); }
         else { throw new NotFoundUserException(); }
+
 
         if (userRequested.getPassword() == null){ throw new VoidPasswordException(); }
         else if (!userInBank.validatePassword(userRequested.getPassword())) { throw new InvalidPasswordException();}
@@ -43,12 +46,12 @@ public class UserService implements IUserService {
     public ResponseUserDTO doRegister(CreateUserDTO userResquested){
 
         authenticateEmail(userResquested.getEmail());
-        Optional<User> optionalUser = userRepository.findByEmail(userResquested.getEmail());
+        Optional<BaseUser> optionalUser = userRepository.findByEmail(userResquested.getEmail());
 
         if (optionalUser.isPresent()) {
             throw new EmailAlreadyExistsException();
         } else {
-            User user = new User(userResquested.getName(),userResquested.getEmail(),userResquested.getPassword());
+            User user = new User(userResquested.getName(),userResquested.getEmail(),userResquested.getPassword(), userResquested.getCpf());
             userRepository.save(user);
             return new ResponseUserDTO(user.getId(), user.getName(), user.getEmail());
         }

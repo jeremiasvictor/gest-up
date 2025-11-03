@@ -5,13 +5,15 @@ public class CreateUserDTO {
     private String name;
     private String email;
     private String password;
+    private String cpf;
 
     CreateUserDTO() {}
 
-    public CreateUserDTO(String name, String email, String password) {
+    public CreateUserDTO(String name, String email, String password, String cpf) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.cpf = cpf;
     }
 
     public String getName() {
@@ -36,5 +38,13 @@ public class CreateUserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf){
+        this.cpf = cpf;
     }
 }
