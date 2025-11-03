@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user_gestup")
 @DiscriminatorValue("COMMON_USER")
 public class User extends BaseUser {
 
@@ -20,6 +19,7 @@ public class User extends BaseUser {
     public User(){super();}
     public User(String name, String email, String password, String cpf){
         super(name, email, password);
+        this.cpf = cpf;
     }
 
     // Methods

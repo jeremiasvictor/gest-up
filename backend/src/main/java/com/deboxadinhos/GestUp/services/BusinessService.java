@@ -2,7 +2,9 @@ package com.deboxadinhos.GestUp.services;
 
 import com.deboxadinhos.GestUp.dto.BusinessDTO;
 import com.deboxadinhos.GestUp.dto.CreateBusinessDTO;
+import com.deboxadinhos.GestUp.exceptions.usuarioException.NotAvailableMethodException;
 import com.deboxadinhos.GestUp.exceptions.usuarioException.NotFoundUserException;
+import com.deboxadinhos.GestUp.models.BaseUser;
 import com.deboxadinhos.GestUp.models.Business;
 import com.deboxadinhos.GestUp.models.User;
 import com.deboxadinhos.GestUp.repository.BusinessRepository;
@@ -26,7 +28,7 @@ public class BusinessService implements IBusinessService{
     @Override
     public List<BusinessDTO> findBusinessesByUserId(UUID idUsuario) throws NotFoundUserException {
 
-        Optional<User> optionalUser = userRepository.findById(idUsuario);
+        Optional<BaseUser> optionalUser = userRepository.findById(idUsuario);
         if (optionalUser.isEmpty()) { throw new NotFoundUserException(); }
 
         List<Business> businesses = businessRepository.findByColumn(idUsuario); // Lista tragada pelo repository
@@ -40,14 +42,18 @@ public class BusinessService implements IBusinessService{
     }
 
     @Override
-    public BusinessDTO createBusiness(CreateBusinessDTO createBusinessDTO) {
+    public BusinessDTO createBusiness(CreateBusinessDTO createBusinessDTO) throws NotAvailableMethodException {
 
-        Optional<User> optionalUser = userRepository.findById(createBusinessDTO.getUserID());
+        Optional<BaseUser> optionalUser = userRepository.findById(createBusinessDTO.getUserID());
         if (optionalUser.isEmpty()) { throw new NotFoundUserException(); }
 
-        Business business = new Business(createBusinessDTO.getName(), createBusinessDTO.getCnpj(), createBusinessDTO.getAddress(), optionalUser.get());
-        businessRepository.save(business);
-
-        return new BusinessDTO(business.getId(), business.getName(), business.getCnpj(), business.getAddress());
+        if (optionalUser.get() instanceof User) {
+            User user = (User )optionalUser.get();
+            Business business = new Business(createBusinessDTO.getName(), createBusinessDTO.getCnpj(), createBusinessDTO.getAddress(), user);
+            businessRepository.save(business);
+            return new BusinessDTO(business.getId(), business.getName(), business.getCnpj(), business.getAddress());
+        } else {
+            throw new NotAvailableMethodException();
+        }
     }
 }

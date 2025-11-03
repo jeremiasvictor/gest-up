@@ -34,4 +34,9 @@ public class UserExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<String> UserAlreadyExists(EmailAlreadyExistsException eae) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(eae.getMessage());
     }
+
+    @ExceptionHandler(NotAvailableMethodException.class)
+    public ResponseEntity<String> NotAvailableMethodException(NotAvailableMethodException name){
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(name.getMessage());
+    }
 }
