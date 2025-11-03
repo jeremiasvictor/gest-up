@@ -34,7 +34,7 @@ public class UserService implements IUserService {
         else { throw new NotFoundUserException(); }
 
         if (userRequested.getPassword() == null){ throw new VoidPasswordException(); }
-        else if (!userInBank.getPassword().equals(userRequested.getPassword())) { throw new InvalidPasswordException();}
+        else if (!userInBank.validatePassword(userRequested.getPassword())) { throw new InvalidPasswordException();}
 
         return new ResponseUserDTO(userInBank.getId(), userInBank.getName(), userInBank.getEmail()) ;
     }

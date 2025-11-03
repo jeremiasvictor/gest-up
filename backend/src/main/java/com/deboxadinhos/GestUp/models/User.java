@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "user_gestup")
-public class User {
+public class User extends AUser {
 
     @Id
     @GeneratedValue
@@ -19,6 +19,7 @@ public class User {
     @Column(nullable = false)
     private String password;
     private String cpf;
+    private int type;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonManagedReference
@@ -30,6 +31,7 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.type = 0;
     }
 
 
