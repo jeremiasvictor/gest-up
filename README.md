@@ -62,7 +62,7 @@ cd backend
 ```
 O backend estará rodando em http://localhost:8080
 
-#### 2. Execute o frontend
+#### 3. Execute o frontend
 
 ```bash
 # abra um NOVO terminal
