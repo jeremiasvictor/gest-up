@@ -16,6 +16,6 @@ public class IdOperationsDTO {
         return id;
     }
     public void setId(UUID id) {
-        this.id = this.id;
+        this.id = id;
     }
 }
