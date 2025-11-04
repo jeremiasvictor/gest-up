@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
+import { toast } from "react-hot-toast";
 import styles from "./Stock.module.css";
 import actionBarStyles from "../../components/ActionBar/ActionBar.module.css";
 
@@ -68,6 +69,9 @@ function Stock() {
   };
 
   const handleCreateProduct = async () => {
+    const priceAsNumber = parseFloat(newProductData.price);
+    const quantityAsNumber = parseInt(newProductData.price) || 0;
+
     try {
       const dataToSend = {
         name: newProductData.name,
@@ -78,10 +82,17 @@ function Stock() {
 
       const response = await api.post("/product", dataToSend);
       setAllProducts((currentProducts) => [...currentProducts, response.data]);
-      setNewModalOpen(false);
-      setNewProductData({ name: "", price: "", quantity: "" });
-    } catch (error) {
-      console.error("Error creating product:", error);
+      handleCloseNewModal();
+
+      toast.success("Product created successfully!");
+    } catch (err: any) {
+      console.error("Error creating product:", err);
+
+      if (err.response && err.response.data) {
+        toast.error(err.response.data);
+      } else {
+        toast.error("Not possible to create the product.");
+      }
     }
   };
 
@@ -97,8 +108,15 @@ function Stock() {
         )
       );
       setEditModalOpen(false);
-    } catch (error) {
-      console.error("Error updating product:", error);
+      toast.success("Product updated successfully!");
+    } catch (err: any) {
+      console.error("Error updating product:", err);
+
+      if (err.response && err.response.data) {
+        toast.error(err.response.data);
+      } else {
+        toast.error("Error updating product");
+      }
     }
   };
 
@@ -115,9 +133,21 @@ function Stock() {
         currentProducts.filter((p) => p.id !== selectedProduct.id)
       );
       setDeleteModalOpen(false);
-    } catch (error) {
-      console.error("Error deleting product:", error);
+      toast.success("Product deleted successfully!");
+    } catch (err: any) {
+      console.error("Error deleting product:", err);
+
+      if (err.response && err.response.data) {
+        toast.error(err.response.data);
+      } else {
+        toast.error("Error deleting product");
+      }
     }
+  };
+
+  const handleCloseNewModal = () => {
+    setNewModalOpen(false);
+    setNewProductData({ name: "", price: "", quantity: "" });
   };
 
   const openEditModal = (product: any) => {

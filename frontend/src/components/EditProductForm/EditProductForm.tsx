@@ -32,7 +32,12 @@ function EditProductForm({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); //prevents page reload
-    onSave(formData);
+    const dataToSend = {
+      ...formData,
+      price: parseFloat(formData.price as any) || 0,
+      quantity: parseInt(formData.quantity as any) || 0,
+    };
+    onSave(dataToSend);
   };
 
   return (
