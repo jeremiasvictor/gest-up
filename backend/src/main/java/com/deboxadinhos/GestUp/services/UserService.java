@@ -7,9 +7,11 @@ import com.deboxadinhos.GestUp.models.BaseUser;
 import com.deboxadinhos.GestUp.models.User;
 import com.deboxadinhos.GestUp.models.UserAdmin;
 import com.deboxadinhos.GestUp.repository.UserRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +22,9 @@ public class UserService implements IUserService {
     private UserRepository userRepository;
 
     @Override
-    public List<BaseUser> findAll() throws NotFoundUserException, InvalidPasswordException{ return userRepository.findAll(); }
+    public List<User> findAll() throws NotFoundUserException, InvalidPasswordException{
+        return userRepository.findAllRegularUsers();
+    }
 
     @Override
     public ResponseUserDTO doLogin(CreateUserDTO userRequested) {

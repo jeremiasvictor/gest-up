@@ -2,6 +2,7 @@ package com.deboxadinhos.GestUp.controllers;
 
 import com.deboxadinhos.GestUp.dto.CreateUserDTO;
 import com.deboxadinhos.GestUp.models.BaseUser;
+import com.deboxadinhos.GestUp.models.User;
 import com.deboxadinhos.GestUp.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping
-    public List<BaseUser> list(){
+    public List<User> list(){
         return userService.findAll();
     }
 

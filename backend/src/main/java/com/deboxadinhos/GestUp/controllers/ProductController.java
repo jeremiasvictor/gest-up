@@ -42,7 +42,7 @@ public class ProductController {
     @DeleteMapping
     public  ResponseEntity<?> deleteProduct(@RequestBody IdOperationsDTO idOperationsDTO){
 
-        productService.deleteProductById(idOperationsDTO.getProductId());
+        productService.deleteProductById(idOperationsDTO.getId());
         return ResponseEntity.status(HttpStatus.OK).body("Product was deleted.");
     }
 
