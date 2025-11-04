@@ -1,6 +1,7 @@
 package com.deboxadinhos.GestUp.controllers;
 
 import com.deboxadinhos.GestUp.dto.CreateBusinessDTO;
+import com.deboxadinhos.GestUp.dto.IdOperationsDTO;
 import com.deboxadinhos.GestUp.services.IBusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,8 +29,8 @@ public class BusinessController {
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deleteBusiness(@RequestBody UUID businessId){
-        businessService.deleteBusiness(businessId);
+    public ResponseEntity<?> deleteBusiness(@RequestBody IdOperationsDTO businessId){
+        businessService.deleteBusiness(businessId.getId());
         return ResponseEntity.status(HttpStatus.OK).body("Business deleted");
     }
 }

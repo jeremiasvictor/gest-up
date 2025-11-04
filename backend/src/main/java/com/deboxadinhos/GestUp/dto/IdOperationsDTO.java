@@ -4,18 +4,18 @@ import java.util.UUID;
 
 public class IdOperationsDTO {
 
-    private UUID productId;
+    private UUID id;
 
     public IdOperationsDTO(){}
 
-    public IdOperationsDTO(UUID productId){
-        this.productId = productId;
+    public IdOperationsDTO(UUID id){
+        this.id = id;
     }
 
-    public UUID getProductId() {
-        return productId;
+    public UUID getId() {
+        return id;
     }
-    public void setProductId(UUID productId) {
-        this.productId = productId;
+    public void setId(UUID id) {
+        this.id = this.id;
     }
 }
