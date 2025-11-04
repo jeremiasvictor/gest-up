@@ -8,7 +8,7 @@ import com.deboxadinhos.GestUp.models.User;
 import java.util.List;
 
 public interface IUserService {
-    List<BaseUser> findAll();
+    List<User> findAll();
     ResponseUserDTO doLogin(CreateUserDTO userRequested);
     ResponseUserDTO doRegister(CreateUserDTO userRequested);
 }
