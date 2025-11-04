@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
+import { toast } from "react-hot-toast";
 import styles from "./Stock.module.css";
 import actionBarStyles from "../../components/ActionBar/ActionBar.module.css";
 
@@ -20,8 +21,6 @@ function Stock() {
   const [searchTerm, setSearchTerm] = useState("");
   //change to true when connect api
   const [isLoading, setIsLoading] = useState(true);
-  const [editError, setEditError] = useState("");
-  const [createError, setCreateError] = useState("");
 
   const [isNewModalOpen, setNewModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
@@ -70,8 +69,6 @@ function Stock() {
   };
 
   const handleCreateProduct = async () => {
-    setCreateError("");
-
     const priceAsNumber = parseFloat(newProductData.price);
     const quantityAsNumber = parseInt(newProductData.price) || 0;
 
@@ -86,20 +83,21 @@ function Stock() {
       const response = await api.post("/product", dataToSend);
       setAllProducts((currentProducts) => [...currentProducts, response.data]);
       handleCloseNewModal();
+
+      toast.success("Product created successfully!");
     } catch (err: any) {
       console.error("Error creating product:", err);
 
       if (err.response && err.response.data) {
-        setCreateError(err.response.data);
+        toast.error(err.response.data);
       } else {
-        setCreateError("Error creating product");
+        toast.error("Not possible to create the product.");
       }
     }
   };
 
   const handleUpdateProduct = async (updatedProductData: any) => {
     try {
-      setEditError("");
       const response = await api.post(
         "/product/updateProduct",
         updatedProductData
@@ -110,13 +108,14 @@ function Stock() {
         )
       );
       setEditModalOpen(false);
+      toast.success("Product updated successfully!");
     } catch (err: any) {
       console.error("Error updating product:", err);
 
       if (err.response && err.response.data) {
-        setEditError(err.response.data);
+        toast.error(err.response.data);
       } else {
-        setEditError("Error updating product");
+        toast.error("Error updating product");
       }
     }
   };
@@ -134,20 +133,25 @@ function Stock() {
         currentProducts.filter((p) => p.id !== selectedProduct.id)
       );
       setDeleteModalOpen(false);
-    } catch (error) {
-      console.error("Error deleting product:", error);
+      toast.success("Product deleted successfully!");
+    } catch (err: any) {
+      console.error("Error deleting product:", err);
+
+      if (err.response && err.response.data) {
+        toast.error(err.response.data);
+      } else {
+        toast.error("Error deleting product");
+      }
     }
   };
 
   const handleCloseNewModal = () => {
     setNewModalOpen(false);
     setNewProductData({ name: "", price: "", quantity: "" });
-    setCreateError("");
   };
 
   const openEditModal = (product: any) => {
     setSelectedProduct(product);
-    setEditError("");
     setEditModalOpen(true);
   };
 
@@ -230,8 +234,6 @@ function Stock() {
           />
         </div>
 
-        {createError && <p className={styles.errorMessage}>{createError}</p>}
-
         <div className={styles.newProductModalButtons}>
           <button
             onClick={() => setNewModalOpen(false)}
@@ -256,7 +258,6 @@ function Stock() {
             productToEdit={selectedProduct}
             onSave={handleUpdateProduct}
             onCancel={() => setEditModalOpen(false)}
-            serverError={editError}
           />
         )}
       </Modal>

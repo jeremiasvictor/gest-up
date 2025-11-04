@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+
 import styles from "./Register.module.css";
 
 import api from "../../services/api";
@@ -14,7 +16,6 @@ function Register() {
     terms: false,
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -35,10 +36,9 @@ function Register() {
 
   async function handleRegister() {
     setLoading(true);
-    setError("");
 
     if (!formData.terms) {
-      setError("You need to accept the terms.");
+      toast.error("You need to accept the terms.");
       setLoading(false);
       return;
     }
@@ -53,12 +53,13 @@ function Register() {
       });
 
       navigate("/login?registered=true");
+      toast.success("Register successful!");
     } catch (err: any) {
       console.error("Error in register:", err);
       if (err.response && err.response.data) {
-        setError(err.response.data);
+        toast.error(err.response.data);
       } else {
-        setError("Register error");
+        toast.error("Register error");
       }
     } finally {
       setLoading(false);
@@ -141,7 +142,6 @@ function Register() {
         <button type="button" onClick={handleRegister} disabled={loading}>
           {loading ? "Criando..." : "Create account"}
         </button>
-        {error && <p className={styles.errorMessage}>{error}</p>}
       </form>
 
       <div className={styles.toLogIn}>

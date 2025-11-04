@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { InputMask } from "@react-input/mask";
+import { toast } from "react-hot-toast";
 import styles from "./Business.module.css";
 
 import api from "../../services/api";
@@ -26,7 +27,6 @@ function Business() {
     address: "",
   });
   const [isCreating, setIsCreating] = useState(false);
-  const [createError, setCreateError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,15 +47,14 @@ function Business() {
 
   async function handleCreateBusiness() {
     if (!newBusinessData.name.trim()) {
-      setCreateError("Business name cannot be empty");
+      toast.error("Business name cannot be empty");
       return;
     }
     setIsCreating(true);
-    setCreateError("");
     const userId = localStorage.getItem("gestup_userId");
 
     if (!userId) {
-      setCreateError("User not authenticated. Please log in again.");
+      toast.error("User not authenticated. Please log in again.");
       setIsCreating(false);
       return;
     }
@@ -72,17 +71,15 @@ function Business() {
       ]);
 
       handleCloseModal();
+      toast.success("Business successfully created!");
     } catch (err: any) {
-      // --- FAÇA ESTA MUDANÇA PARA DEPURAÇÃO ---
-      console.error("DETALHES COMPLETOS DO ERRO:", err); // Loga o objeto de erro inteiro
-      if (err.response) {
-        // O servidor respondeu com um status de erro (4xx, 5xx)
-        console.error("DADOS DO ERRO (do backend):", err.response.data);
-        console.error("STATUS DO ERRO:", err.response.status);
-      }
-      // -----------------------------------------
+      console.error("Error creating business:", err);
 
-      setCreateError("Não foi possível criar a empresa. Tente novamente.");
+      if (err.response && err.response.data) {
+        toast.error(err.response.data);
+      } else {
+        toast.error("Not possible to create the business.");
+      }
     } finally {
       setIsCreating(false);
     }
@@ -99,7 +96,6 @@ function Business() {
   const handleCloseModal = () => {
     setNewBusinessModalOpen(false);
     setNewBusinessData({ name: "", cnpj: "", address: "" });
-    setCreateError("");
   };
 
   return (
@@ -188,8 +184,6 @@ function Business() {
               placeholder="Ex: Flower Street, 123"
             />
           </div>
-
-          {createError && <p className={styles.errorMessage}>{createError}</p>}
 
           <div className={styles.modalActions}>
             <button onClick={handleCloseModal} className={styles.cancelButton}>

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import styles from "./Login.module.css";
 
 import api from "../../services/api";
@@ -11,7 +12,6 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const inputEmail = useRef<HTMLInputElement>(null);
   const inputPassword = useRef<HTMLInputElement>(null);
@@ -27,7 +27,6 @@ function Login() {
 
   async function handleLogin() {
     setLoading(true);
-    setError("");
 
     const email = inputEmail.current?.value || "";
     const password = inputPassword.current?.value || "";
@@ -41,16 +40,17 @@ function Login() {
         localStorage.setItem("gestup_userId", userId);
         localStorage.setItem("gestup_userName", userName);
         navigate("/business");
+        toast.success("Login successful!");
       } else {
-        setError("An unexpected error ocurred while logging in");
+        toast.error("An unexpected error ocurred while logging in");
       }
     } catch (err: any) {
       console.error("Error in login:", err);
 
       if (err.response && err.response.data) {
-        setError(err.response.data);
+        toast.error(err.response.data);
       } else {
-        setError("Login error");
+        toast.error("Login error");
       }
     } finally {
       setLoading(false);
@@ -100,7 +100,6 @@ function Login() {
         <button type="button" onClick={handleLogin} disabled={loading}>
           {loading ? "Entrando..." : "Log in"}
         </button>
-        {error && <p>{error}</p>}
       </form>
 
       <div className={styles.toSignIn}>
