@@ -34,7 +34,7 @@ Para rodar este projeto, você precisará ter o Frontend e o Backend rodando sim
 
 - Node.js (v18 ou superior)
 - Java (JDK) (v17 ou superior)
-- Um servidor PostgreSQL rodando localmente (ou via Docker)
+- Um servidor MySQL rodando localmente (ou via Docker) com um database 'gestup'
 
 #### 1. Clone o repositório
 ```bash
@@ -51,9 +51,9 @@ cd gest-up
 cd backend
 
 # configure o banco de dados
-#   - inicie seu serviço do PostgreSQL
-#   - crie um banco de dados local (ex: 'gestup_db')
-#   - edite o 'src/main/resources/application.properties' com seu usuário e senha do PostgreSQL
+#   - inicie seu serviço do MySQL
+#   - crie um banco de dados local (ex: 'gestup')
+#   - edite o 'src/main/resources/application.properties' com seu usuário e senha do MySQL
 
 # rode a aplicação (pela sua IDE ou via terminal)
 # se estiver usando a IDE (IntelliJ/VS Code), basta rodar a classe principal 'GestUpApplication.java'
