@@ -46,10 +46,10 @@ public class UserService implements IUserService {
     public ResponseUserDTO doRegister(CreateUserDTO userResquested) throws VoidPasswordException, NullNameException{
 
         authenticateEmail(userResquested.getEmail());
-        if (userResquested.getPassword() == null){
+        if (userResquested.getPassword() == null || userResquested.getPassword().isEmpty()){
             throw new VoidPasswordException();
         }
-        if (userResquested.getName() == null){
+        if (userResquested.getName() == null || userResquested.getName().isEmpty()){
             throw new NullNameException();
         }
         Optional<BaseUser> optionalUser = userRepository.findByEmail(userResquested.getEmail());

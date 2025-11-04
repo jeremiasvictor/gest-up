@@ -6,6 +6,7 @@ import com.deboxadinhos.GestUp.dto.ProductDTO;
 import com.deboxadinhos.GestUp.exceptions.productExceptions.ProductHasInvalidPriceException;
 import com.deboxadinhos.GestUp.exceptions.productExceptions.ProductHasInvalidQuantityException;
 import com.deboxadinhos.GestUp.exceptions.productExceptions.ProductNotFoundException;
+import com.deboxadinhos.GestUp.exceptions.usuarioException.NullNameException;
 import com.deboxadinhos.GestUp.models.Business;
 import com.deboxadinhos.GestUp.models.Product;
 import com.deboxadinhos.GestUp.repository.BusinessRepository;
@@ -40,6 +41,9 @@ public class ProductService implements IProductService{
         if (createProductDTO.getQuantity() < 0){
             throw new ProductHasInvalidQuantityException();
         }
+        if(createProductDTO.getName() == null || createProductDTO.getName().isEmpty()){
+            throw new NullNameException();
+        }
 
         productRepository.save(product);
 
@@ -47,7 +51,7 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public ProductDTO updateProduct(ProductDTO productDTO) throws ProductNotFoundException, ProductHasInvalidPriceException {
+    public ProductDTO updateProduct(ProductDTO productDTO) throws ProductNotFoundException, ProductHasInvalidPriceException, NullNameException {
 
         Product productToUpdate;
         Optional<Product> optionalProduct = productRepository.findById(productDTO.getId());
@@ -64,6 +68,10 @@ public class ProductService implements IProductService{
 
         if (productDTO.getQuantity() < 0){
             throw new ProductHasInvalidQuantityException();
+        }
+
+        if(productDTO.getName() == null || productDTO.getName().isEmpty()){
+            throw new NullNameException();
         }
 
         productToUpdate.setName(productDTO.getName());
