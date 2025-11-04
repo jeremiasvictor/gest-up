@@ -3,6 +3,7 @@ package com.deboxadinhos.GestUp.services;
 import com.deboxadinhos.GestUp.dto.BusinessDTO;
 import com.deboxadinhos.GestUp.dto.CreateBusinessDTO;
 import com.deboxadinhos.GestUp.dto.IdOperationsDTO;
+import com.deboxadinhos.GestUp.exceptions.businessExceptions.BusinessNotFound;
 import com.deboxadinhos.GestUp.exceptions.usuarioException.NotAvailableMethodException;
 import com.deboxadinhos.GestUp.exceptions.usuarioException.NotFoundUserException;
 import com.deboxadinhos.GestUp.models.BaseUser;
@@ -59,7 +60,13 @@ public class BusinessService implements IBusinessService{
     }
 
     @Override
-    public void deleteBusiness(UUID businessId){
-        businessRepository.deleteById(businessId);
+    public void deleteBusiness(UUID businessId) throws BusinessNotFound {
+
+        Optional<Business> id = businessRepository.findById(businessId);
+        if(id.isEmpty()){
+            throw new BusinessNotFound();
+        }else{
+            businessRepository.deleteById(businessId);
+        }
     }
 }

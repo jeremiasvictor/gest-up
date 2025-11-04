@@ -11,4 +11,5 @@ public interface IBusinessService {
     List<BusinessDTO> findBusinessesByUserId(UUID id);
     BusinessDTO createBusiness(CreateBusinessDTO createBusinessDTO);
     void deleteBusiness(UUID id);
+
 }
