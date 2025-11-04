@@ -48,7 +48,7 @@ public class BusinessService implements IBusinessService{
         if (optionalUser.isEmpty()) { throw new NotFoundUserException(); }
 
         if (optionalUser.get() instanceof User) {
-            User user = (User )optionalUser.get();
+            User user = (User)optionalUser.get();
             Business business = new Business(createBusinessDTO.getName(), createBusinessDTO.getCnpj(), createBusinessDTO.getAddress(), user);
             businessRepository.save(business);
             return new BusinessDTO(business.getId(), business.getName(), business.getCnpj(), business.getAddress());
