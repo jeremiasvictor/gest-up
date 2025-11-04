@@ -20,6 +20,8 @@ function Stock() {
   const [searchTerm, setSearchTerm] = useState("");
   //change to true when connect api
   const [isLoading, setIsLoading] = useState(true);
+  const [editError, setEditError] = useState("");
+  const [createError, setCreateError] = useState("");
 
   const [isNewModalOpen, setNewModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
@@ -68,6 +70,11 @@ function Stock() {
   };
 
   const handleCreateProduct = async () => {
+    setCreateError("");
+
+    const priceAsNumber = parseFloat(newProductData.price);
+    const quantityAsNumber = parseInt(newProductData.price) || 0;
+
     try {
       const dataToSend = {
         name: newProductData.name,
@@ -78,15 +85,21 @@ function Stock() {
 
       const response = await api.post("/product", dataToSend);
       setAllProducts((currentProducts) => [...currentProducts, response.data]);
-      setNewModalOpen(false);
-      setNewProductData({ name: "", price: "", quantity: "" });
-    } catch (error) {
-      console.error("Error creating product:", error);
+      handleCloseNewModal();
+    } catch (err: any) {
+      console.error("Error creating product:", err);
+
+      if (err.response && err.response.data) {
+        setCreateError(err.response.data);
+      } else {
+        setCreateError("Error creating product");
+      }
     }
   };
 
   const handleUpdateProduct = async (updatedProductData: any) => {
     try {
+      setEditError("");
       const response = await api.post(
         "/product/updateProduct",
         updatedProductData
@@ -97,8 +110,14 @@ function Stock() {
         )
       );
       setEditModalOpen(false);
-    } catch (error) {
-      console.error("Error updating product:", error);
+    } catch (err: any) {
+      console.error("Error updating product:", err);
+
+      if (err.response && err.response.data) {
+        setEditError(err.response.data);
+      } else {
+        setEditError("Error updating product");
+      }
     }
   };
 
@@ -120,8 +139,15 @@ function Stock() {
     }
   };
 
+  const handleCloseNewModal = () => {
+    setNewModalOpen(false);
+    setNewProductData({ name: "", price: "", quantity: "" });
+    setCreateError("");
+  };
+
   const openEditModal = (product: any) => {
     setSelectedProduct(product);
+    setEditError("");
     setEditModalOpen(true);
   };
 
@@ -204,6 +230,8 @@ function Stock() {
           />
         </div>
 
+        {createError && <p className={styles.errorMessage}>{createError}</p>}
+
         <div className={styles.newProductModalButtons}>
           <button
             onClick={() => setNewModalOpen(false)}
@@ -228,6 +256,7 @@ function Stock() {
             productToEdit={selectedProduct}
             onSave={handleUpdateProduct}
             onCancel={() => setEditModalOpen(false)}
+            serverError={editError}
           />
         )}
       </Modal>

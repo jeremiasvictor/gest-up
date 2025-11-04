@@ -105,3 +105,9 @@
 .deleteButton:hover {
   background: var(--buttons-hover);
 }
+
+.errorMessage {
+  color: #e57373;
+  margin-top: -20px;
+  font-size: 12px;
+}

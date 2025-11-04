@@ -54,9 +54,12 @@ function Register() {
 
       navigate("/login?registered=true");
     } catch (err: any) {
-      const errorMessage = err.response?.data?.message;
-      // setError("Error registering. Please try again.");
-      setError(errorMessage);
+      console.error("Error in register:", err);
+      if (err.response && err.response.data) {
+        setError(err.response.data);
+      } else {
+        setError("Register error");
+      }
     } finally {
       setLoading(false);
     }

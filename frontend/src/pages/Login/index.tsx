@@ -45,7 +45,13 @@ function Login() {
         setError("An unexpected error ocurred while logging in");
       }
     } catch (err: any) {
-      setError("Invalid username or password");
+      console.error("Error in login:", err);
+
+      if (err.response && err.response.data) {
+        setError(err.response.data);
+      } else {
+        setError("Login error");
+      }
     } finally {
       setLoading(false);
     }
