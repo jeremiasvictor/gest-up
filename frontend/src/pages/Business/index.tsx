@@ -102,26 +102,26 @@ function Business() {
   };
 
   const handleDeleteBusiness = async () => {
-    // if (!businessToDelete) return;
-    // try {
-    //   await api.delete("/business", {
-    //     data: {
-    //       id: businessToDelete.id,
-    //     },
-    //   });
-    //   setBusinesses((currentBusinesses) =>
-    //     currentBusinesses.filter((b) => b.id !== businessToDelete.id)
-    //   );
-    //   toast.success("Business successfully deleted");
-    //   handleCloseDeleteModal();
-    // } catch (err: any) {
-    //   console.error("Error in deleting business:", err);
-    //   if (err.response && err.response.data) {
-    //     toast.error(err.response.data);
-    //   } else {
-    //     toast.error("Deleting error");
-    //   }
-    // }
+    if (!businessToDelete) return;
+    try {
+      await api.delete("/business", {
+        data: {
+          id: businessToDelete.id,
+        },
+      });
+      setBusinesses((currentBusinesses) =>
+        currentBusinesses.filter((b) => b.id !== businessToDelete.id)
+      );
+      toast.success("Business successfully deleted");
+      handleCloseDeleteModal();
+    } catch (err: any) {
+      console.error("Error in deleting business:", err);
+      if (err.response && err.response.data) {
+        toast.error(err.response.data);
+      } else {
+        toast.error("Deleting error");
+      }
+    }
   };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
