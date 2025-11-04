@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Business {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
     private String cnpj;

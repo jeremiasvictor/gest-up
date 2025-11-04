@@ -3,6 +3,8 @@ package com.deboxadinhos.GestUp.services;
 
 import com.deboxadinhos.GestUp.dto.CreateProductDTO;
 import com.deboxadinhos.GestUp.dto.ProductDTO;
+import com.deboxadinhos.GestUp.exceptions.productExceptions.ProductHasInvalidPriceException;
+import com.deboxadinhos.GestUp.exceptions.productExceptions.ProductHasInvalidQuantityException;
 import com.deboxadinhos.GestUp.exceptions.productExceptions.ProductNotFoundException;
 import com.deboxadinhos.GestUp.models.Business;
 import com.deboxadinhos.GestUp.models.Product;
@@ -25,18 +27,27 @@ public class ProductService implements IProductService{
     @Autowired
     BusinessRepository businessRepository;
     @Override
-    public ProductDTO createProduct(CreateProductDTO createProductDTO) {
+    public ProductDTO createProduct(CreateProductDTO createProductDTO) throws ProductHasInvalidPriceException, ProductHasInvalidQuantityException {
 
         Optional<Business> business = businessRepository.findById(createProductDTO.getBusiness_id());
 
         Product product = new Product(createProductDTO.getName(), createProductDTO.getQuantity(), createProductDTO.getPrice(), business.get());
+
+        if(createProductDTO.getPrice() < 0){
+            throw new ProductHasInvalidPriceException();
+        }
+
+        if (createProductDTO.getQuantity() < 0){
+            throw new ProductHasInvalidQuantityException();
+        }
+
         productRepository.save(product);
 
         return new ProductDTO(product.getId(),product.getName(), product.getQuantity(), product.getPrice());
     }
 
     @Override
-    public ProductDTO updateProduct(ProductDTO productDTO) throws ProductNotFoundException {
+    public ProductDTO updateProduct(ProductDTO productDTO) throws ProductNotFoundException, ProductHasInvalidPriceException {
 
         Product productToUpdate;
         Optional<Product> optionalProduct = productRepository.findById(productDTO.getId());
@@ -45,6 +56,14 @@ public class ProductService implements IProductService{
             productToUpdate = optionalProduct.get();
         } else {
             throw new ProductNotFoundException();
+        }
+
+        if (productDTO.getPrice() < 0){
+            throw new ProductHasInvalidPriceException();
+        }
+
+        if (productDTO.getQuantity() < 0){
+            throw new ProductHasInvalidQuantityException();
         }
 
         productToUpdate.setName(productDTO.getName());

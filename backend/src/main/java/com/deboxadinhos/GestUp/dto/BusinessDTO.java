@@ -1,7 +1,5 @@
 package com.deboxadinhos.GestUp.dto;
 
-import com.deboxadinhos.GestUp.models.Product;
-
 import java.util.List;
 import java.util.UUID;
 
