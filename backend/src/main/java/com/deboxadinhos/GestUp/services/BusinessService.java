@@ -29,7 +29,6 @@ public class BusinessService implements IBusinessService{
 
     @Override
     public List<BusinessDTO> findBusinessesByUserId(UUID idUsuario) throws NotFoundUserException {
-
         Optional<BaseUser> optionalUser = userRepository.findById(idUsuario);
         if (optionalUser.isEmpty()) { throw new NotFoundUserException(); }
 
