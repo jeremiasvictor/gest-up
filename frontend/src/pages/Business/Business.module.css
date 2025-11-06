@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
 }
 
@@ -70,7 +71,18 @@
 
 .card {
   display: flex;
-  padding: 10px;
+  align-items: center;
+  text-decoration: none;
+  justify-content: flex-start;
+  color: var(--text);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.businessCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
   border-radius: 25px;
   border: 1px solid var(--border);
   background-image: linear-gradient(
@@ -78,13 +90,9 @@
     rgba(155, 137, 235, 0.05),
     rgba(255, 255, 255, 0)
   );
-  text-decoration: none;
-  color: var(--text);
-  transition: transform 0.2s, box-shadow 0.2s;
   width: 100%;
   max-width: 300px;
   min-height: 70px;
-  justify-content: center;
 }
 
 .card:hover {
@@ -182,4 +190,49 @@
 
 .createButton:hover {
   background: var(--buttons-hover);
+}
+
+.businessPageWrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.businessPageWrapper::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 4px;
+}
+
+.businessPageWrapper::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+.businessPageWrapper::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+.deleteModalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.deleteModalP {
+  margin-top: 20px;
+}
+
+.deleteButton {
+  color: var(--text);
+  background: var(--buttons-bg);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.deleteButton:hover {
+  background: var(--buttons-hover);
+}
+
+.tashIcon {
+  cursor: pointer;
 }

@@ -125,7 +125,7 @@ function Stock() {
     try {
       await api.delete("/product", {
         data: {
-          productId: selectedProduct.id,
+          id: selectedProduct.id,
         },
       });
 

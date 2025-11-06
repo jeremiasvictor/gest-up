@@ -9,6 +9,7 @@ import Header from "../../components/Header/Header";
 import Modal from "../../components/Modal/Modal";
 
 import { FaPlus } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa6";
 
 interface IBusiness {
   id: number;
@@ -28,6 +29,11 @@ function Business() {
   });
   const [isCreating, setIsCreating] = useState(false);
   const navigate = useNavigate();
+
+  const [businessToDelete, setBusinessToDelete] = useState<IBusiness | null>(
+    null
+  );
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   useEffect(() => {
     const userId = localStorage.getItem("gestup_userId");
@@ -85,6 +91,39 @@ function Business() {
     }
   }
 
+  const handleOpenDeleteModal = (business: IBusiness) => {
+    setBusinessToDelete(business);
+    setDeleteModalOpen(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setBusinessToDelete(null);
+    setDeleteModalOpen(false);
+  };
+
+  const handleDeleteBusiness = async () => {
+    if (!businessToDelete) return;
+    try {
+      await api.delete("/business", {
+        data: {
+          id: businessToDelete.id,
+        },
+      });
+      setBusinesses((currentBusinesses) =>
+        currentBusinesses.filter((b) => b.id !== businessToDelete.id)
+      );
+      toast.success("Business successfully deleted");
+      handleCloseDeleteModal();
+    } catch (err: any) {
+      console.error("Error in deleting business:", err);
+      if (err.response && err.response.data) {
+        toast.error(err.response.data);
+      } else {
+        toast.error("Deleting error");
+      }
+    }
+  };
+
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewBusinessData((prevData) => ({
@@ -118,15 +157,19 @@ function Business() {
         ) : (
           <main className={styles.gridContainer}>
             {businesses.map((business) => (
-              <Link
-                key={business.id}
-                to={`/business/${business.id}/stock`}
-                className={styles.card}
-              >
-                <span>{business.name}</span>
-              </Link>
+              <div key={business.id} className={styles.businessCard}>
+                <Link
+                  to={`/business/${business.id}/stock`}
+                  className={styles.card}
+                >
+                  <span>{business.name}</span>
+                </Link>
+                <FaTrash
+                  className={styles.tashIcon}
+                  onClick={() => handleOpenDeleteModal(business)}
+                />
+              </div>
             ))}
-
             <button
               className={`${styles.card} ${styles.newCard}`}
               onClick={() => setNewBusinessModalOpen(true)}
@@ -197,6 +240,28 @@ function Business() {
               {isCreating ? "Creating..." : "Create business"}
             </button>
           </div>
+        </div>
+      </Modal>
+
+      <Modal isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}>
+        <h2>Confirm deletion</h2>
+        <p className={styles.deleteModalP}>
+          Are you sure you want to delete{" "}
+          <strong>{businessToDelete?.name}</strong>?
+        </p>
+        <div className={styles.deleteModalButtons}>
+          <button
+            onClick={() => setDeleteModalOpen(false)}
+            className={styles.cancelButton}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleDeleteBusiness}
+            className={styles.deleteButton}
+          >
+            Delete
+          </button>
         </div>
       </Modal>
     </div>
